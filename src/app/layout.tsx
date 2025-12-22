@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
-import { Poppins, Noto_Sans, Open_Sans } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import "./globals.css";
+import {NextIntlClientProvider} from "next-intl";
 
 const poppins = Poppins({
     subsets: ['latin'],
     weight: ['200', '300', '500', '700', '900'],
-    variable: '--font-sans',
-});
-
-const openSans = Open_Sans({
-    subsets: ['latin'],
-    weight: ['300', '500', '700'],
-    variable: '--font-sans',
+    variable: '--font-poppins',
 });
 
 export const metadata: Metadata = {
@@ -26,9 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${openSans.variable} font-sans antialiased bg-primary-black`}
+        className={`${poppins.variable} font-sans antialiased bg-primary-black`}
       >
-        {children}
+      <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
     </html>
   );

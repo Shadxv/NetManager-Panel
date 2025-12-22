@@ -1,0 +1,13 @@
+{
+  "HeroSection": {
+    "title": "your own dream server network",
+    "titlePrefix1": "Create",
+    "titlePrefix2": "Manage"
+  },
+  "HomeSections": {
+    "manageTitle": "Everything you run, perfectly organized",
+    "manageDescription": "Stop switching between multiple tabs and platforms. Control every node, service, and instance from a single, centralized dashboard designed to give you a bird's-eye view of your entire server network.",
+    "consoleTitle": "Command center for every instance",
+    "consoleDescription": "Interact with your services instantly through a built-in, low-latency console. Monitor live logs, execute commands, and troubleshoot issues in real-time without ever leaving your browser."
+  }
+}
