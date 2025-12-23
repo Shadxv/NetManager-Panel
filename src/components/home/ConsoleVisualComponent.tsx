@@ -1,13 +1,51 @@
+'use client'
+
 import {BaseView} from "@/components/home/VisualComponents";
-import React from "react";
+import React, {useRef} from "react";
+import {gsap} from "gsap";
+import {useGSAP} from "@gsap/react";
 
 export const ConsoleVisualComponent = () => {
-    return (<BaseView activeTile={2} content={(
-        <div className="w-full h-full p-4 sm:p-6 flex flex-col gap-2">
-            <span className="bg-primary-black rounded-xl aspect-5/1 sm:aspect-4/1 w-1/6 mb-1 sm:mb-2"/>
-            {ConsoleView()}
+    const container = useRef<HTMLDivElement>(null);
+
+    useGSAP(() => {
+        const lines = gsap.utils.toArray<HTMLElement>(".console-line");
+
+        const tl = gsap.timeline({
+            repeat: -1,
+            repeatDelay: 2.5,
+            scrollTrigger: {
+                trigger: container.current,
+                start: "top 90%",
+                toggleActions: "play pause resume pause"
+            }
+        });
+
+        tl.to(lines, {
+            opacity: 1,
+            duration: 0.1,
+            stagger: 0.4,
+            ease: "none"
+        });
+
+        tl.to(lines, {
+            opacity: 0,
+            duration: 0.3,
+            delay: 1.5
+        });
+
+    }, { scope: container });
+
+    return (
+        <div ref={container} className="w-full h-full">
+            <BaseView activeTile={2} content={(
+                <div className="w-full h-full p-4 sm:p-6 flex flex-col gap-2">
+                    <span className="bg-primary-black rounded-xl aspect-5/1 sm:aspect-4/1 w-1/6 mb-1 sm:mb-2"/>
+                    {ConsoleView()}
+                </div>
+            )}/>
         </div>
-    )}/>)
+    )
 }
 
 const ConsoleView = () => {
@@ -43,7 +81,7 @@ const ConsoleView = () => {
             <div className="bg-secondary-black w-full h-full rounded-xl flex flex-col overflow-hidden p-3 gap-2 sm:gap-2.5 shadow-inner">
                 <div className="flex flex-col gap-2 sm:gap-3 overflow-hidden">
                     {linesSchema.map((line, i) => (
-                        <div key={i} className="flex gap-2 h-1 sm:h-1.5 shrink-0">
+                        <div key={i} className="console-line flex gap-2 h-1 sm:h-1.5 shrink-0 opacity-0">
                             {line.segments.map((width, j) => (
                                 <div
                                     key={j}
