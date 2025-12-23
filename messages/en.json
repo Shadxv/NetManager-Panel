@@ -2,12 +2,21 @@
   "HeroSection": {
     "title": "your own dream server network",
     "titlePrefix1": "Create",
-    "titlePrefix2": "Manage"
+    "titlePrefix2": "Manage",
+    "description": "Take total command of your server network. A unified platform built to help you deploy, manage, and optimize your entire infrastructure with effortless efficiency and professional-grade reliability."
   },
   "HomeSections": {
     "manageTitle": "Everything you run, perfectly organized",
     "manageDescription": "Stop switching between multiple tabs and platforms. Control every node, service, and instance from a single, centralized dashboard designed to give you a bird's-eye view of your entire server network.",
     "consoleTitle": "Command center for every instance",
-    "consoleDescription": "Interact with your services instantly through a built-in, low-latency console. Monitor live logs, execute commands, and troubleshoot issues in real-time without ever leaving your browser."
+    "consoleDescription": "Interact with your services instantly through a built-in, low-latency console. Monitor live logs, execute commands, and troubleshoot issues in real-time without ever leaving your browser.",
+    "filesTitle": "Manage files without FTP",
+    "filesDescription": "Edit configuration files and manage your data directly through a built-in, high-performance web editor. No external clients required — just open the panel and start coding with full syntax highlighting.",
+    "databaseTitle": "Direct Database Insights",
+    "databaseDescription": "Browse your tables and inspect data structures with an integrated database viewer. Monitor your storage, verify entries, and manage your data across multiple instances without ever leaving your browser.",
+    "rolesTitle": "Granular Access Control",
+    "rolesDescription": "Protect your infrastructure with a powerful role-based permission system. Define custom access levels for your team, ensuring every member has exactly the tools they need while keeping your core system secure.",
+    "setupTitle": "One-Click Deployment",
+    "setupDescription": "Launch new services in seconds. Our automated engine handles everything: network configuration, dependency installation, and file synchronization. Get your server up and running without touching a single terminal command."
   }
 }

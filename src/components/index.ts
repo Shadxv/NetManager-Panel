@@ -1,3 +1,2 @@
-export * from './HeroSection'
-export * from './HomeSection'
-export * from './ManagementVisualComponent'
+export * from './home'
+export * from './gsap'

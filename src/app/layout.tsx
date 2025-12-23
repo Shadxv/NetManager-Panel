@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from 'next/font/google';
 import "./globals.css";
 import {NextIntlClientProvider} from "next-intl";
+import {GsapRegistrar} from "@/components";
 
 const poppins = Poppins({
     subsets: ['latin'],
@@ -23,7 +24,8 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} font-sans antialiased bg-primary-black`}
       >
-      <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <GsapRegistrar />
+        <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
     </html>
   );
