@@ -3,7 +3,8 @@
     "title": "your own dream server network",
     "titlePrefix1": "Create",
     "titlePrefix2": "Manage",
-    "description": "Take total command of your server network. A unified platform built to help you deploy, manage, and optimize your entire infrastructure with effortless efficiency and professional-grade reliability."
+    "description": "Take total command of your server network. A unified platform built to help you deploy, manage, and optimize your entire infrastructure with effortless efficiency and professional-grade reliability.",
+    "dashboardButton": "Go to dashboard"
   },
   "HomeSections": {
     "manageTitle": "Everything you run, perfectly organized",
@@ -18,5 +19,14 @@
     "rolesDescription": "Protect your infrastructure with a powerful role-based permission system. Define custom access levels for your team, ensuring every member has exactly the tools they need while keeping your core system secure.",
     "setupTitle": "One-Click Deployment",
     "setupDescription": "Launch new services in seconds. Our automated engine handles everything: network configuration, dependency installation, and file synchronization. Get your server up and running without touching a single terminal command."
+  },
+  "HomeNavBar": {
+    "preferences": "Preferences",
+    "language": "Language",
+    "languageDescription": "Select your interface language",
+    "appearance": "Appearance",
+    "appearanceDescription": "Switch between dark and light mode",
+    "homePageExcluded": "Home page excluded",
+    "signIn": "Sign in"
   }
 }

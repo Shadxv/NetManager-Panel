@@ -27,7 +27,7 @@ export const HeroSection = () => {
                 <h1 className="element text-primary-white text-3xl md:text-4xl lg:text-6xl font-semibold">{t("titlePrefix1")} {t("title")}</h1>
                 <p className="element text-secondary-gray text-sm md:text-lg font-light">{t("description")}</p>
                 <div className="element">
-                    <button className="bg-accent rounded-full p-2 px-6 text-primary-white font-semibold hover:text-accent hover:bg-primary-white hover:shadow-primary-white/50 hover:shadow-md mt-4 transition">Go to dashboard</button>
+                    <button className="bg-accent rounded-xl p-2 px-6 text-primary-white font-semibold hover:text-accent hover:bg-primary-white hover:shadow-primary-white/50 hover:shadow-md mt-4 transition">{t("dashboardButton")}</button>
                 </div>
             </div>
             <div className="relative -z-10">

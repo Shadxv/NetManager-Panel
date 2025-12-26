@@ -7,8 +7,6 @@ import {cookies} from "next/headers";
 import {getMessages} from "next-intl/server";
 import StoreProvider from "@/components/StoreProvider";
 import ThemeWrapper from "@/components/ThemeWrapper";
-import ThemeToggle from "@/components/ThemeToggle";
-import {BubbleSwitch} from "@/components/BubbleSwitchComponent";
 
 const poppins = Poppins({
     subsets: ['latin'],

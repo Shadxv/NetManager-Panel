@@ -1,0 +1,32 @@
+{
+  "HeroSection": {
+    "title": "swoją własna wymarzoną sieć serwerów",
+    "titlePrefix1": "Stwórz",
+    "titlePrefix2": "Zarządzaj",
+    "description": "Przejmij pełną kontrolę nad swoją siecią serwerów. Zunifikowana platforma stworzona, aby pomóc Ci wdrażać, zarządzać i optymalizować całą infrastrukturę z łatwością i profesjonalną niezawodnością.",
+    "dashboardButton": "Przejdź do panelu"
+  },
+  "HomeSections": {
+    "manageTitle": "Wszystko w jednym miejscu, perfekcyjnie zorganizowane",
+    "manageDescription": "Przestań przełączać się między wieloma kartami i platformami. Kontroluj każdy węzeł, usługę i instancję z jednego, scentralizowanego pulpitu zaprojektowanego, aby dać Ci pełny podgląd całej sieci serwerów.",
+    "consoleTitle": "Centrum dowodzenia dla każdej instancji",
+    "consoleDescription": "Interakcja z usługami natychmiastowo dzięki wbudowanej konsoli o niskim opóźnieniu. Monitoruj logi na żywo, wykonuj polecenia i rozwiązuj problemy w czasie rzeczywistym bez opuszczania przeglądarki.",
+    "filesTitle": "Zarządzaj plikami bez FTP",
+    "filesDescription": "Edytuj pliki konfiguracyjne i zarządzaj danymi bezpośrednio przez wbudowany, wydajny edytor internetowy. Nie są wymagane żadne zewnętrzne klienty — po prostu otwórz panel i zacznij kodować z pełnym podświetlaniem składni.",
+    "databaseTitle": "Bezpośredni wgląd w bazę danych",
+    "databaseDescription": "Przeglądaj tabele i sprawdzaj struktury danych za pomocą zintegrowanej przeglądarki baz danych. Monitoruj pamięć masową, weryfikuj wpisy i zarządzaj danymi w wielu instancjach bez opuszczania przeglądarki.",
+    "rolesTitle": "Szczegółowa kontrola dostępu",
+    "rolesDescription": "Chroń swoją infrastrukturę za pomocą potężnego systemu uprawnień opartego na rolach. Zdefiniuj niestandardowe poziomy dostępu dla swojego zespołu, zapewniając każdemu członkowi dokładnie te narzędzia, których potrzebuje, jednocześnie zachowując bezpieczeństwo głównego systemu.",
+    "setupTitle": "Wdrożenie jednym kliknięciem",
+    "setupDescription": "Uruchamiaj nowe usługi w kilka sekund. Nasz zautomatyzowany silnik zajmuje się wszystkim: konfiguracją sieci, instalacją zależności i synchronizacją plików. Uruchom swój serwer bez dotykania ani jednego polecenia terminala."
+  },
+  "HomeNavBar": {
+    "preferences": "Ustawienia",
+    "language": "Język",
+    "languageDescription": "Wybierz język interfejsu",
+    "appearance": "Motyw",
+    "appearanceDescription": "Zmień wygląd aplikacji na jasny lub ciemny",
+    "homePageExcluded": "Nie dotyczy strony głównej",
+    "signIn": "Zaloguj się"
+  }
+}
