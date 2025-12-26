@@ -21,7 +21,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@messages/*": ["./messages/*"],
-      "@pub/*": ["./public/*"]
+      "@pub/*": ["./public/*"],
+      "@lib/*": ["./lib/*"]
     }
   },
   "include": [

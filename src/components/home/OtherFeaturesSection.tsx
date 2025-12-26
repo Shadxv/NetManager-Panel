@@ -40,11 +40,11 @@ export const OtherFeaturesSection = () => {
 
     return (
         <section ref={container} id="other" className="w-full p-8 md:px-16 py-20 lg:py-40 md:pb-40">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-16 sm:gap-8 lg:gap-8">
-                <div className="feature-card opacity-0 will-change-transform"><FeatureCard id="files" visual={FileManagerCardVisual()}/></div>
-                <div className="feature-card opacity-0 will-change-transform"><FeatureCard id="database" visual={DatabaseVisual()} technologies={[SupportsTechnologyTile({name: "MongoDB", borderColor: "border-[#12AA53]", image: "/mongodb-logo.svg"})]}/></div>
-                <div className="feature-card opacity-0 will-change-transform"><FeatureCard id="roles" visual={PermissionsVisual()}/></div>
-                <div className="feature-card opacity-0 will-change-transform lg:col-start-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-16 sm:gap-8 lg:gap-8">
+                <div className="feature-card opacity-0"><FeatureCard id="files" visual={FileManagerCardVisual()}/></div>
+                <div className="feature-card opacity-0"><FeatureCard id="database" visual={DatabaseVisual()} technologies={[SupportsTechnologyTile({name: "MongoDB", borderColor: "border-[#12AA53]", image: "/mongodb-logo.svg"})]}/></div>
+                <div className="feature-card opacity-0"><FeatureCard id="roles" visual={PermissionsVisual()}/></div>
+                <div className="feature-card opacity-0">
                     <FeatureCard id="setup" visual={DeploymentVisual()} technologies={[
                         SupportsTechnologyTile({name: "Velocity", borderColor: "border-[#ffffff]", image: "/velocity-logo.svg"}),
                         SupportsTechnologyTile({name: "PaperMC", borderColor: "border-[#FD5057]", image: "/papermc-logo.svg"})

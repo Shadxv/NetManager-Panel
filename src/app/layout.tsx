@@ -3,6 +3,12 @@ import { Poppins } from 'next/font/google';
 import "./globals.css";
 import {NextIntlClientProvider} from "next-intl";
 import {GsapRegistrar} from "@/components";
+import {cookies} from "next/headers";
+import {getMessages} from "next-intl/server";
+import StoreProvider from "@/components/StoreProvider";
+import ThemeWrapper from "@/components/ThemeWrapper";
+import ThemeToggle from "@/components/ThemeToggle";
+import {BubbleSwitch} from "@/components/BubbleSwitchComponent";
 
 const poppins = Poppins({
     subsets: ['latin'],
@@ -14,19 +20,29 @@ export const metadata: Metadata = {
   title: "Panel",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${poppins.variable} font-sans antialiased bg-primary-black`}
-      >
-        <GsapRegistrar />
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
-      </body>
-    </html>
-  );
+
+    const cookieStore = await cookies();
+    const theme = (cookieStore.get('theme')?.value as 'light' | 'dark') || 'dark';
+    const language: 'pl' | 'en' = (cookieStore.get('NEXT_LOCALE')?.value as 'en' | 'pl') || 'en';
+    const messages = await getMessages();
+
+    return (
+        <html lang={language} className={theme}>
+            <body id="body" className={`${poppins.variable} font-sans antialiased bg-primary-white dark:bg-primary-black transition-colors duration-300 ease-in-out`}>
+                <StoreProvider initialData={{ theme, language }}>
+                    <ThemeWrapper>
+                        <NextIntlClientProvider messages={messages} locale={language}>
+                            <GsapRegistrar />
+                            {children}
+                        </NextIntlClientProvider>
+                    </ThemeWrapper>
+                </StoreProvider>
+            </body>
+        </html>
+    );
 }

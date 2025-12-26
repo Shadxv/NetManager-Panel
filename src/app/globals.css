@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@variant dark (&:where(.dark, .dark *));
+
 @theme {
     --font-sans: var(--font-poppins);
 
@@ -9,5 +11,7 @@
     --color-muted-gray: #3f3f5a;
     --color-secondary-gray: #8e8ea8;
     --color-primary-white: #eeeeff;
+    --color-secondary-white: #d1d1f0;
+    --color-muted-white: #a8a8c0;
     --color-accent: #4f46e5;
 }
