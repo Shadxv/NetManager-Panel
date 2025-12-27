@@ -19,3 +19,11 @@ html {
     --color-muted-white: #a8a8c0;
     --color-accent: #4f46e5;
 }
+
+.login-input {
+    @apply w-full border-b-2 border-b-secondary-black/50 dark:border-b-secondary-white/50 hover:not-focus:border-b-primary-black dark:hover:not-focus:border-b-primary-white focus:border-b-accent text-secondary-black dark:text-secondary-white transition-colors duration-200 focus:outline-none
+}
+
+.login-label {
+    @apply text-primary-gray dark:text-muted-white text-sm font-light
+}

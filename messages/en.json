@@ -28,5 +28,10 @@
     "appearanceDescription": "Switch between dark and light mode",
     "homePageExcluded": "Home page excluded",
     "signIn": "Sign in"
+  },
+  "LoginPage": {
+    "signIn": "Sign in",
+    "email": "Email",
+    "password": "Password"
   }
 }

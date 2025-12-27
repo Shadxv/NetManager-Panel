@@ -28,5 +28,10 @@
     "appearanceDescription": "Zmień wygląd aplikacji na jasny lub ciemny",
     "homePageExcluded": "Nie dotyczy strony głównej",
     "signIn": "Zaloguj się"
+  },
+  "LoginPage": {
+    "signIn": "Zaloguj się",
+    "email": "Email",
+    "password": "Hasło"
   }
 }
