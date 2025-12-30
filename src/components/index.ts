@@ -1,2 +1,5 @@
 export * from './home'
 export * from './Gsap'
+export * from './ThemeWrapper'
+export * from './StoreProvider'
+export * from './BubbleSwitchComponent'

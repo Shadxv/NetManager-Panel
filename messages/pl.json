@@ -33,5 +33,11 @@
     "signIn": "Zaloguj się",
     "email": "Email",
     "password": "Hasło"
+  },
+  "Errors": {
+    "emailRequired": "Email jest wymagany",
+    "passwordRequired": "Hasło jest wymagane",
+    "incorrectEmailFormat": "Niepoprawny format emaila",
+    "incorrectPasswordFormat": "Niepoprawny format hasła"
   }
 }

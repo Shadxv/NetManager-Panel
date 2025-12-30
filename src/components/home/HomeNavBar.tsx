@@ -79,7 +79,6 @@ export const HomeNavBar = () => {
 
     return (
         <>
-            {/* NAVBAR */}
             <nav className={`fixed top-0 left-0 z-40 w-full flex items-center justify-between p-4 md:px-16 px-6 transition-all duration-500 ${
                 isAtTop
                     ? "bg-transparent border-transparent shadow-none"
@@ -117,7 +116,6 @@ export const HomeNavBar = () => {
                 </button>
             </nav>
 
-            {/* DROPDOWN MENU */}
             <div
                 ref={menuRef}
                 className={`${active ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"} fixed top-0 left-0 z-50 w-full bg-primary-black/95 backdrop-blur-md border-b border-muted-gray/20 transition-all duration-500 ease-in-out shadow-2xl shadow-primary-black`}
