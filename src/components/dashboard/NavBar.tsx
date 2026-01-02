@@ -2,68 +2,134 @@
 
 import Link from "next/dist/client/link";
 import {NavBarButtons} from "@/constants";
-import {NavButton} from "@/components/dashboard";
+import {AccountMenu, NavButton} from "@/components/dashboard";
 import {useEffect, useRef, useState} from "react";
+import {CloseIcon, HamburgerIcon, Logo, Signet} from "@/components/icons";
+import {useTranslations} from "next-intl";
 
 export const NavBar = () => {
 
-    const menuRef = useRef<HTMLDivElement>(null);
-    const buttonRef = useRef<HTMLButtonElement>(null);
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const accountMenuRefMobile = useRef<HTMLDivElement>(null);
+    const accountMenuRefDesktop = useRef<HTMLDivElement>(null);
+    const accountMenuButtonRefMobile = useRef<HTMLButtonElement>(null);
+    const accountMenuButtonRefDesktop = useRef<HTMLButtonElement>(null);
+    const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false)
+    const [isNavMenuOpen, setIsNavMenuOpen] = useState(false)
+    const t = useTranslations("DashboardNavBar")
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (
-                isMenuOpen &&
-                menuRef.current && !menuRef.current.contains(event.target as Node) &&
-                buttonRef.current && !buttonRef.current.contains(event.target as Node)
+                isAccountMenuOpen &&
+                accountMenuRefMobile.current && !accountMenuRefMobile.current.contains(event.target as Node) &&
+                accountMenuRefDesktop.current && !accountMenuRefDesktop.current.contains(event.target as Node) &&
+                accountMenuButtonRefMobile.current && !accountMenuButtonRefMobile.current.contains(event.target as Node) &&
+                accountMenuButtonRefDesktop.current && !accountMenuButtonRefDesktop.current.contains(event.target as Node)
             ) {
-                setIsMenuOpen(false);
+                setIsAccountMenuOpen(false);
             }
         };
 
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, [isMenuOpen]);
+    }, [isAccountMenuOpen]);
+
+    useEffect(() => {
+        const handleScrollLock = () => {
+            if (isNavMenuOpen && window.innerWidth < 1024) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        };
+
+        handleScrollLock();
+
+        window.addEventListener('resize', handleScrollLock);
+
+        return () => {
+            document.body.style.overflow = '';
+            window.removeEventListener('resize', handleScrollLock);
+        };
+    }, [isNavMenuOpen]);
+
+    const toggleAccountMenu = () => {
+        setIsAccountMenuOpen(!isAccountMenuOpen)
+    }
 
     return (
-        <nav className="h-full flex flex-col gap-10 p-6">
-            <Link
-                href="/dashboard"
-                className="group flex items-center cursor-pointer"
-            >
-                <div className="flex items-center transition-transform duration-300 active:scale-95 group-hover:scale-105">
-                    <div className="size-10">
-                        <svg viewBox="0 0 5000 5000" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                            <path d="M912.942,1550.438l1591.3,-893.783l1586.879,891.771l0.408,1953.279l-1595.158,889.912l-1587.379,-883.808l3.95,-1957.367l0,-0.004Zm1249.567,-4.417l-617.512,356.733l0,1242.229l614.054,356.788l0,-1160.946l348.213,-190.492l335.442,194.721l5.854,1150.279l623.325,-340.162l0,-1248.083l-621.083,-359.975l-2.554,543.938l-349.213,-203.096l-334.817,201.296l-1.708,-543.229Z" fill="#1e1b4b"/>
-                            <path d="M2159.05,2340.829l348.213,-190.492l335.442,194.721l-330.504,189.633l-353.154,-193.863l0.004,0Z" fill="#3730a3"/>
-                            <path d="M910.371,2822.842l2.567,-1272.4l1591.3,-893.783l1586.879,891.771l0.262,1268.883l-619.496,337.871l0,-1248.083l-621.083,-359.975l-2.554,543.938l-349.213,-203.096l-334.817,201.296l-1.708,-543.229l-617.512,356.733l0,1242.229l-634.625,-322.146l0,-0.008Z" fill="#3730a3"/>
-                            <path d="M912.921,1559.692l0.017,-9.254l1591.3,-893.783l1582.367,889.238l-614.725,361.904l0,-0.7l-621.083,-359.975l-2.554,543.938l-349.213,-203.096l-334.817,201.296l-1.708,-543.229l-617.512,356.733l-632.054,-352.325l-0.017,9.254Z" fill="#4f46e5"/>
-                            <path d="M2418.258,704.95l85.983,-48.296l85.712,48.171l677.084,1083.538l-416.238,-241.246l-2.554,543.938l-349.213,-203.096l-334.817,201.296l-1.708,-543.229l-409.763,236.721l665.513,-1077.792l0,-0.004Z" fill="#473fcf"/>
-                        </svg>
-                    </div>
-                    <span className="ml-3 font-bold text-primary-black dark:text-primary-white tracking-tighter text-xl">NET<span className="text-accent">Manager</span></span>
-                </div>
-            </Link>
-            <div className="h-full flex flex-col justify-between">
-                <div className="w-full flex flex-col gap-1">
-                    {NavBarButtons.map(item => (
-                        <NavButton key={"navbutton-"+item.text.toLowerCase()} href={item.href} text={item.text} icon={item.icon}/>
-                    ))}
-                </div>
-                <div className="relative h-full">
-                    <div className="absolute bottom-2 -left-6">
-                        {/*<AccountMenu ref={menuRef} isOpen={isMenuOpen}/>*/}
-                    </div>
-                </div>
-                <button ref={buttonRef} className="flex items-center gap-4 p-2 rounded-2xl hover:bg-secondary-white/40 dark:hover:bg-secondary-white/10" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                    <div className="size-10 rounded-full bg-white"/>
-                    <div className="flex flex-col justify-start">
-                        <h2 className="text-primary-black dark:text-primary-white text-start">Kamil Sadowski</h2>
-                        <p className="text-secondary-black dark:text-secondary-white text-sm font-light text-start">shadxw.kontakt@gmail.com</p>
+        <>
+            <nav className="relative w-full bg-primary-white dark:bg-primary-black p-4 px-6 md:px-8 flex justify-between lg:hidden shadow-lg shadow-primary-black/10 dark:shadow-primary-black/60 transition-colors duration-300 ease-in-out">
+                <button
+                    className="p-2 rounded-full transition-all hover:shadow-sm text-secondary-gray hover:text-secondary-black hover:dark:text-primary-white dark:hover:bg-muted-gray/20 dark:outline dark:outline-transparent dark:hover:outline-muted-gray/40"
+                    onClick={() => setIsNavMenuOpen(true)}
+                >
+                    <div className="flex justify-center items-center size-6">
+                        {HamburgerIcon}
                     </div>
                 </button>
-            </div>
-        </nav>
+                <button ref={accountMenuButtonRefMobile} onClick={toggleAccountMenu}>
+                    <div className="rounded-full bg-white size-8 shadow-sm shadow-primary-black/10"/>
+                </button>
+                <div className="absolute top-18 right-0">
+                    <AccountMenu ref={accountMenuRefMobile} isOpen={isAccountMenuOpen}/>
+                </div>
+            </nav>
+
+            {isNavMenuOpen && <div className="lg:hidden fixed w-screen h-screen top-0 left-0 bg-primary-black/20 dark:bg-primary-black/90 backdrop-blur-xs z-98" onClick={() => setIsNavMenuOpen(false)}/>}
+
+            <nav className={`${isNavMenuOpen ? "fixed top-0 left-0 z-99" : "not-lg:hidden"} h-screen w-78 min-w-78 shrink-0 lg:static flex flex-col gap-10 p-6 bg-primary-white dark:bg-primary-black shadow-lg shadow-primary-black/10`}>
+                <div className="flex w-full items-center justify-between lg:block">
+                    <Link
+                        href="/dashboard"
+                        className="group flex items-center cursor-pointer"
+                    >
+                        <div className="transition-transform duration-300 active:scale-95 group-hover:scale-105">
+                            {Logo}
+                        </div>
+                    </Link>
+                    <button
+                        className="lg:hidden p-2 rounded-full transition-all hover:shadow-sm text-secondary-gray hover:text-secondary-black hover:dark:text-primary-white dark:hover:bg-muted-gray/20 dark:outline dark:outline-transparent dark:hover:outline-muted-gray/40"
+                        onClick={() => setIsNavMenuOpen(false)}
+                    >
+                        <div className="flex justify-center items-center size-6">
+                            {CloseIcon}
+                        </div>
+                    </button>
+                </div>
+                <div className="h-full w-full flex flex-col justify-between">
+                    <div className="w-full flex flex-col gap-1">
+                        {NavBarButtons.map(item => (
+                            <NavButton key={"navbutton-"+item.text.toLowerCase()} href={item.href} text={t(item.text)} icon={item.icon} hasSubpages={item.hasSubpages}/>
+                        ))}
+                    </div>
+                    <div className="hidden w-full lg:flex flex-col">
+                        <div className="relative h-full">
+                            <div className="absolute bottom-2 -left-6">
+                                <AccountMenu ref={accountMenuRefDesktop} isOpen={isAccountMenuOpen}/>
+                            </div>
+                        </div>
+                        <div className="w-full">
+                            <button
+                                ref={accountMenuButtonRefDesktop}
+                                className="flex items-center gap-4 p-2 rounded-2xl hover:bg-secondary-white/40 dark:hover:bg-secondary-white/10 w-full"
+                                onClick={toggleAccountMenu}
+                            >
+                                <div className="size-10 rounded-full bg-white shrink-0"/>
+
+                                <div className="flex flex-col justify-start min-w-0 flex-1">
+                                    <h2 className="text-primary-black dark:text-primary-white text-start truncate font-normal">
+                                        Kamil Sadowski
+                                    </h2>
+                                    <p className="text-secondary-black dark:text-secondary-white text-sm font-light text-start truncate opacity-60">
+                                        shadxw.kontakt@gmail.com
+                                    </p>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </>
     )
 }

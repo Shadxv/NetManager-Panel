@@ -39,5 +39,19 @@
     "passwordRequired": "Hasło jest wymagane",
     "incorrectEmailFormat": "Niepoprawny format emaila",
     "incorrectPasswordFormat": "Niepoprawny format hasła"
+  },
+  "DashboardNavBar": {
+    "preferences": "Preferencje",
+    "language": "Język",
+    "theme": "Motyw",
+    "userSettings": "Ustawienia użytkownika",
+    "signout": "Wyloguj",
+    "dashboard": "Kokpit",
+    "services": "Serwisy",
+    "files": "Pliki",
+    "settings": "Ustawienia",
+    "database": "Baza danych",
+    "users": "Użytkownicy",
+    "roles": "Role"
   }
 }

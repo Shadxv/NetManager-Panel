@@ -8,11 +8,12 @@ interface NavButtonProp {
     href: string
     text: string
     icon: React.ReactNode
+    hasSubpages: boolean
 }
 
-export const NavButton = ({href, text, icon}: NavButtonProp) => {
+export const NavButton = ({href, text, icon, hasSubpages}: NavButtonProp) => {
     const pathname = usePathname()
-    const isActive = pathname.startsWith(href)
+    const isActive = (hasSubpages && pathname.startsWith(href)) || pathname === href
 
     return (
         <Link href={href}

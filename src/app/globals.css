@@ -21,6 +21,18 @@ html {
     --color-red-primary: #ff413e;
 }
 
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-accent/75 hover:bg-accent p-px rounded-full;
+}
+
 .login-input {
     @apply w-full border-b-2 border-b-secondary-black/50 dark:border-b-secondary-white/50 hover:not-focus:not-disabled:border-b-primary-black dark:hover:not-focus:not-disabled:border-b-primary-white focus:border-b-accent text-secondary-black dark:text-secondary-white transition-colors duration-200 focus:outline-none
 }
@@ -32,3 +44,4 @@ html {
 .login-label {
     @apply text-primary-gray dark:text-muted-white text-sm font-light
 }
+

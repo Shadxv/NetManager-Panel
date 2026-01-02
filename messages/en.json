@@ -39,5 +39,19 @@
     "passwordRequired": "Password is required",
     "incorrectEmailFormat": "Incorrect email format",
     "incorrectPasswordFormat": "Incorrect password format"
+  },
+  "DashboardNavBar": {
+    "preferences": "Preferences",
+    "language": "Language",
+    "theme": "Theme",
+    "userSettings": "User Settings",
+    "signout": "Sign out",
+    "dashboard": "Dashboard",
+    "services": "Services",
+    "files": "Files",
+    "settings": "Settings",
+    "database": "Database",
+    "users": "Users",
+    "roles": "Roles"
   }
 }
