@@ -34,12 +34,6 @@
     "email": "Email",
     "password": "Hasło"
   },
-  "Errors": {
-    "emailRequired": "Email jest wymagany",
-    "passwordRequired": "Hasło jest wymagane",
-    "incorrectEmailFormat": "Niepoprawny format emaila",
-    "incorrectPasswordFormat": "Niepoprawny format hasła"
-  },
   "DashboardNavBar": {
     "preferences": "Preferencje",
     "language": "Język",
@@ -57,6 +51,7 @@
   "Roles": {
     "title": "Role",
     "createNew": "Utwórz nową",
+    "creating": "Tworzenie...",
     "notSelected": "Nie wybrałeś roli",
     "notSelectedDescription": "Klinkij na role po lewej stronie aby podejrzec jej szczegóły i je edytowac",
     "back": "Powrót",
@@ -73,6 +68,20 @@
     "permissions": "Uprawnienia",
     "delete": "Usuń",
     "save": "Zapisz",
+    "noRoles": "Nic tu nie ma",
+
+    "unsavedChanges": {
+      "title": "Poczekaj chwilę!",
+      "description": "Masz tu niezapisane zmiany. Jeżeli wyjdziesz teraz to zostaną one utracone. Jaka decyzja?",
+      "proceed": "Porzuć i Wyjdź",
+      "save": "Zapisz zmiany"
+    },
+    "deleteAlert": {
+      "title": "Usuwasz tę rolę?",
+      "description": "Za chwilę usuniesz rolę \"{name}\". Tego nie będzie można odwrócić i ta decyzja może mieć negatywny wpływ na jej posiadaczy.",
+      "confirm": "Usuń",
+      "cancel": "Nie rób tego"
+    },
 
     "systemCategory": "System",
     "admin": "Administrator",
@@ -135,5 +144,35 @@
     "deleteRolesDescription": "Pozwala na usuwanie ról (tylko jeśli nie są przypisane do żadnego użytkownika)",
     "applyRoles": "Nadawanie ról",
     "applyRolesDescription": "Umożliwia przypisywanie ról do konkretnych kont użytkowników"
+  },
+  "Errors": {
+    "retry": "Ponów próbę",
+    "goBack": "Powrót",
+    "emailRequired": "Email jest wymagany",
+    "passwordRequired": "Hasło jest wymagane",
+    "incorrectEmailFormat": "Niepoprawny format emaila",
+    "incorrectPasswordFormat": "Niepoprawny format hasła",
+    "404": {
+      "title": "Nie Znaleziono",
+      "messages": {
+        "roleNotFound": "Rola nie została znaleziona"
+      }
+    },
+    "408": {
+      "title": "Przekroczono czas oczekiwania",
+      "message": "Serwer nie odpowiedział"
+    },
+    "500": {
+      "title": "Wewnętrzny błąd serwera",
+      "message": "Podczas komunikacji z serwerem wystąpił nieoczekiwany błąd"
+    }
+  },
+  "Popups": {
+    "errorCreatingRole": "Wystąpił błąd podczas tworzenia nowej roli",
+    "savedChangesRole": "Pomyślnie zapisano zmiany dla roli {name}",
+    "errorChangesRole": "Wystąpił błąd podczas zapisywania zmian",
+    "deletedRole": "Pomyślnie usunięto role {name}",
+    "errorDeletingRole": "Wystąpił błąd podczas usuwania roli {name}",
+    "errorRolePriority": "Wystąpił błąd podczas zmieniania priorytetu roli"
   }
 }

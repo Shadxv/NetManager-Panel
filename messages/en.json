@@ -34,12 +34,6 @@
     "email": "Email",
     "password": "Password"
   },
-  "Errors": {
-    "emailRequired": "Email is required",
-    "passwordRequired": "Password is required",
-    "incorrectEmailFormat": "Incorrect email format",
-    "incorrectPasswordFormat": "Incorrect password format"
-  },
   "DashboardNavBar": {
     "preferences": "Preferences",
     "language": "Language",
@@ -57,6 +51,7 @@
   "Roles": {
     "title": "Roles",
     "createNew": "Create new",
+    "creating": "Creating...",
     "notSelected": "No role selected",
     "notSelectedDescription": "Please select role to see its details and edit them",
     "back": "Back",
@@ -73,6 +68,20 @@
     "permissions": "Permissions",
     "delete": "Delete",
     "save": "Save",
+    "noRoles": "Nothing there",
+
+    "unsavedChanges": {
+      "title": "Hold on a second!",
+      "description": "You've got some unsaved edits here. If you leave now, they're gone for good. What's the plan?",
+      "proceed": "Discard & Leave",
+      "save": "Save changes"
+    },
+    "deleteAlert": {
+      "title": "Delete this role?",
+      "description": "You're about to wipe out the role \"{name}\". This can't be undone and might affect some users.",
+      "confirm": "Delete anyway",
+      "cancel": "Nevermind"
+    },
 
     "systemCategory": "System",
     "admin": "Administrator",
@@ -135,5 +144,35 @@
     "deleteRolesDescription": "Allows to remove roles (only if not assigned to users)",
     "applyRoles": "Apply roles",
     "applyRolesDescription": "Allows to assign roles to specific user accounts"
+  },
+  "Errors": {
+    "retry": "Retry",
+    "goBack": "Back",
+    "emailRequired": "Email is required",
+    "passwordRequired": "Password is required",
+    "incorrectEmailFormat": "Incorrect email format",
+    "incorrectPasswordFormat": "Incorrect password format",
+    "404": {
+      "title": "Not Found",
+      "messages": {
+        "roleNotFound": "Role has not been found"
+      }
+    },
+    "408": {
+      "title": "Timed out",
+      "message": "Server did not respond"
+    },
+    "500": {
+      "title": "Internal Server Error",
+      "message": "Unexpected error occured during communication with server"
+    }
+  },
+  "Popups": {
+    "errorCreatingRole": "Error occured during creating new role",
+    "savedChangesRole": "Successfully saved changes for role {name}",
+    "errorChangesRole": "Error occured during saving changes",
+    "deletedRole": "Successfully deleted role {name}",
+    "errorDeletingRole": "Error occured during deleting role {name}",
+    "errorRolePriority": "Error occured during changing role priority"
   }
 }
