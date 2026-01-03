@@ -18,7 +18,8 @@ html {
     --color-secondary-white: #d1d1f0;
     --color-muted-white: #a8a8c0;
     --color-accent: #4f46e5;
-    --color-red-primary: #ff413e;
+    --color-red-primary: #FF3B30;
+    --color-green-primary: #34C759;
 }
 
 ::-webkit-scrollbar {
@@ -43,5 +44,17 @@ html {
 
 .login-label {
     @apply text-primary-gray dark:text-muted-white text-sm font-light
+}
+
+.form-input {
+    @apply w-full border-b-2 border-b-secondary-black/50 dark:border-b-secondary-white/50 hover:not-focus:not-disabled:border-b-primary-black dark:hover:not-focus:not-disabled:border-b-primary-white focus:border-b-accent text-secondary-black dark:text-secondary-white text-lg transition-colors duration-200 focus:outline-none
+}
+
+.form-input-error {
+    @apply w-full border-b-2 border-b-red-600 text-secondary-black dark:text-secondary-white text-lg transition-colors duration-200 focus:outline-none
+}
+
+.form-label {
+    @apply text-primary-gray dark:text-muted-white font-light
 }
 

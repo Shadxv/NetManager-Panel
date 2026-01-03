@@ -59,7 +59,7 @@ export const NavBar = () => {
 
     return (
         <>
-            <nav className="relative w-full bg-primary-white dark:bg-primary-black p-4 px-6 md:px-8 flex justify-between lg:hidden shadow-lg shadow-primary-black/10 dark:shadow-primary-black/60 transition-colors duration-300 ease-in-out">
+            <nav className="relative z-97 w-full bg-primary-white dark:bg-primary-black p-4 px-6 md:px-8 flex justify-between lg:hidden shadow-lg shadow-primary-black/10 dark:shadow-primary-black/60 transition-colors duration-300 ease-in-out">
                 <button
                     className="p-2 rounded-full transition-all hover:shadow-sm text-secondary-gray hover:text-secondary-black hover:dark:text-primary-white dark:hover:bg-muted-gray/20 dark:outline dark:outline-transparent dark:hover:outline-muted-gray/40"
                     onClick={() => setIsNavMenuOpen(true)}
