@@ -4,6 +4,8 @@ import React, { createContext, useContext, useState } from 'react';
 import {BaseRole, RoleDetails} from "@/types";
 import axios from "axios";
 import { RESTAPI_URL } from "@/constants";
+import {useAppDispatch} from "@lib/hooks";
+import {addPopup} from "@lib/features/popupSlice";
 
 const RolesContext = createContext<{
     roles: BaseRole[];
@@ -14,9 +16,11 @@ const RolesContext = createContext<{
     updateRoleLocal: (id: string, partialRole: Partial<RoleDetails>) => void
 } | undefined>(undefined);
 
-export function RolesProvider({ children }: { children: React.ReactNode }) {
+export const RolesProvider = ({ children }: { children: React.ReactNode }) => {
     const [roles, setRoles] = useState<BaseRole[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+
+    const dispatch = useAppDispatch()
 
     const refreshRoles = async () => {
         setIsLoading(true);
@@ -25,7 +29,7 @@ export function RolesProvider({ children }: { children: React.ReactNode }) {
                 setRoles(res.data.sort((a: BaseRole, b: BaseRole) => a.index - b.index))
             })
             .catch((e) => {
-                // TODO: error
+                dispatch(addPopup({type: "error", message: "failedRefreshRoles"}))
             })
             .finally(() => setIsLoading(false))
     };

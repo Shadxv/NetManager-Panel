@@ -165,7 +165,7 @@ export const RoleForm = ({ role }: { role: RoleDetails }) => {
                             onChange={formik.handleChange}
                             value={formik.values.color}
                             disabled={formik.isSubmitting}
-                            className="size-10 outline-none border-none bg-transparent cursor-pointer"
+                            className="size-7 outline-none border-none bg-transparent cursor-pointer"
                         />
                         <input
                             name="color"
@@ -182,7 +182,7 @@ export const RoleForm = ({ role }: { role: RoleDetails }) => {
 
             <div className="flex flex-col gap-6">
                 <h1 className="text-xl font-bold text-primary-black dark:text-primary-white">{t("permissions")}</h1>
-                <div className="w-full h-0.5 bg-muted-gray/10 dark:bg-primary-white/40" />
+                <div className="w-full h-0.5 bg-muted-gray/10 dark:bg-primary-white/10" />
 
                 {PERMISSION_GROUPS.map((group) => (
                     <div key={group.category} className="flex flex-col gap-4">
@@ -213,7 +213,7 @@ export const RoleForm = ({ role }: { role: RoleDetails }) => {
                 ))}
             </div>
 
-            <div className="flex justify-between items-center mt-8">
+            <div className="flex justify-between items-center">
                 <button
                     type="button"
                     onClick={() => setShowDeleteModal(true)}
@@ -275,7 +275,7 @@ export const RoleForm = ({ role }: { role: RoleDetails }) => {
 };
 
 const PermissionToggle = ({ label, description, isChecked, onChange, disabled }: PermissionToggleProps) => (
-    <div className="flex gap-6 items-center justify-between p-5 bg-primary-white dark:bg-primary-black/20 rounded-2xl transition-all border border-muted-gray/5">
+    <div className="flex gap-6 items-center justify-between p-5 bg-primary-white dark:bg-primary-black/20 rounded-2xl">
         <div className="flex flex-col gap-1 pr-4 text-left">
             <span className="text-primary-black dark:text-primary-white font-bold text-sm md:text-base">
                 {label}

@@ -145,6 +145,38 @@
     "applyRoles": "Apply roles",
     "applyRolesDescription": "Allows to assign roles to specific user accounts"
   },
+  "Users": {
+    "noUsersFound": "No users found",
+    "sortByLabel": "Sort by",
+    "indexAsc": "Role (default)",
+    "nameAsc": "Name",
+    "emailAsc": "Email",
+    "dateDesc": "Creation date",
+
+    "inviteExpired": "Invite expired",
+    "inviteExpiresIn": "Invite expires",
+    "timeUnits": {
+      "days": "{count, plural, =1 {in 1 day} other {in # days}}",
+      "hours": "{count, plural, =1 {in 1 hour} other {in # hours}}",
+      "minutes": "{count, plural, =1 {in 1 minute} other {in # minutes}}"
+    },
+
+    "filters": {
+      "searchByName": "Name and surname...",
+      "searchByEmail": "Email address...",
+      "selectRoles": "Select roles",
+      "roles": "Roles",
+      "noRole": "No role",
+      "selectCreator": "Created by",
+      "createdByFilter": "Creator",
+      "allCreators": "All creators",
+      "showOnlyUnprovisioned": "Invite pending only",
+      "resetFilters": "Reset filters",
+      "from": "Invited after",
+      "to": "Invited before",
+      "unknown": "Unknown"
+    }
+  },
   "Errors": {
     "retry": "Retry",
     "goBack": "Back",
@@ -173,6 +205,9 @@
     "errorChangesRole": "Error occured during saving changes",
     "deletedRole": "Successfully deleted role {name}",
     "errorDeletingRole": "Error occured during deleting role {name}",
-    "errorRolePriority": "Error occured during changing role priority"
+    "errorRolePriority": "Error occured during changing role priority",
+    "failedRefreshRoles": "Error occured during refreshing role list",
+    "fetchingUsersError": "Error occured during fetching users",
+    "fetchingUserRoleError": "Error occured during fetching user role details"
   }
 }

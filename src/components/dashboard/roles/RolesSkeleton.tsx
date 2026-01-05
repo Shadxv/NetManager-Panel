@@ -1,4 +1,4 @@
-export function RolesSkeleton() {
+export const RolesSkeleton = () => {
     return (
         <div className="w-full flex flex-col gap-2 pt-4 animate-pulse">
             {[...Array(6)].map((_, i) => (

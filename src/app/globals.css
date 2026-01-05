@@ -58,3 +58,6 @@ html {
     @apply text-primary-gray dark:text-muted-white font-light
 }
 
+.dashboard-small-btn {
+    @apply rounded-md p-2 px-4 md:px-8 max-w-30 md:max-w-48 truncate text-sm font-light shadow-md shadow-primary-black/10 text-center
+}

@@ -20,7 +20,7 @@ interface Props {
     isLoading: boolean;
 }
 
-export function RoleListContainer({ roles, setRoles, isLoading }: Props) {
+export const RoleListContainer = ({ roles, setRoles, isLoading }: Props) => {
     const path = usePathname();
     const dispatch = useAppDispatch()
     const t = useTranslations("Roles")

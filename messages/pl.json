@@ -145,6 +145,38 @@
     "applyRoles": "Nadawanie ról",
     "applyRolesDescription": "Umożliwia przypisywanie ról do konkretnych kont użytkowników"
   },
+  "Users": {
+    "noUsersFound": "Nie znaleziono żadnych użytkowników",
+    "sortByLabel": "Sortuj po",
+    "indexAsc": "Rola (domyślnie)",
+    "nameAsc": "Nazwa",
+    "emailAsc": "Email",
+    "dateDesc": "Data stworzenia",
+
+    "inviteExpired": "Zaproszenie wygasło",
+    "inviteExpiresIn": "Zaproszenie wygasa",
+    "timeUnits": {
+      "days": "{count, plural, =1 {za dzień} one {za # dzień} few {za # dni} many {za # dni} other {za # dni}}",
+      "hours": "{count, plural, =1 {za godzinę} one {za # godzinę} few {za # godziny} many {za # godzin} other {za # godzin}}",
+      "minutes": "{count, plural, =1 {za minutę} one {za # minutę} few {za # minuty} many {za # minut} other {za # minut}}"
+    },
+
+    "filters": {
+      "searchByName": "Imię i nazwisko...",
+      "searchByEmail": "Adres email...",
+      "selectRoles": "Wybierz rangi",
+      "roles": "Rangi",
+      "noRole": "Bez roli",
+      "selectCreator": "Utworzone przez",
+      "createdByFilter": "Twórca",
+      "allCreators": "Wszyscy twórcy",
+      "showOnlyUnprovisioned": "Tylko z oczekującymi zaproszeniami",
+      "resetFilters": "Resetuj filtry",
+      "from": "Zaproszony po",
+      "to": "Zaproszony przed",
+      "unknown": "Nieznany"
+    }
+  },
   "Errors": {
     "retry": "Ponów próbę",
     "goBack": "Powrót",
@@ -173,6 +205,7 @@
     "errorChangesRole": "Wystąpił błąd podczas zapisywania zmian",
     "deletedRole": "Pomyślnie usunięto role {name}",
     "errorDeletingRole": "Wystąpił błąd podczas usuwania roli {name}",
-    "errorRolePriority": "Wystąpił błąd podczas zmieniania priorytetu roli"
+    "errorRolePriority": "Wystąpił błąd podczas zmieniania priorytetu roli",
+    "failedRefreshRoles": "Wystąpił błąd podczas odświeżania listy ról"
   }
 }
