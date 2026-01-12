@@ -4,6 +4,12 @@ import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
 import { useTranslations } from "next-intl";
 import Link from "next/dist/client/link";
+import {Account, AuthStatus, setCredentials} from "@lib/features/accountSlice";
+import {useRouter, useSearchParams} from "next/navigation";
+import {useDispatch} from "react-redux";
+import axios from "axios";
+import {RESTAPI_URL} from "@/constants";
+import Cookies from "js-cookie";
 
 interface FormValues {
     email: string;
@@ -15,40 +21,78 @@ interface FormErrors {
     password?: string;
 }
 
-const validate = (values: FormValues) => {
-    const errors: FormErrors = {};
-
-    if (!values.email) {
-        errors.email = 'emailRequired';
-    } else {
-        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-        const isValidEmail = emailRegex.test(values.email);
-        if (values.email !== 'admin' && !isValidEmail) {
-            errors.email = 'incorrectEmailFormat';
-        }
-    }
-
-    if (!values.password) {
-        errors.password = 'passwordRequired';
-    } else if (values.password.length < 8 || /\s/.test(values.password)) {
-        errors.password = 'incorrectPasswordFormat';
-    }
-
-    return errors;
-};
-
 export default function LoginPage() {
     const t = useTranslations("LoginPage");
     const tErrors = useTranslations("Errors");
 
-    const [loginError, setLoginError] = useState<string | undefined>(undefined)
+    const router = useRouter();
+    const dispatch = useDispatch();
+    const searchParams = useSearchParams();
+
+    const callbackUrl = searchParams.get('callbackUrl');
+
+    const [loginError, setLoginError] = useState<string | undefined>(undefined);
+
+    const validate = (values: FormValues) => {
+        const errors: FormErrors = {};
+
+        if (!values.email) {
+            errors.email = 'emailRequired';
+        } else {
+            const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+            const isValidEmail = emailRegex.test(values.email);
+            if (values.email !== 'admin' && !isValidEmail) {
+                errors.email = 'incorrectEmailFormat';
+            }
+        }
+
+        if (!values.password) {
+            errors.password = 'passwordRequired';
+        } else if (values.password.length < 8 || /\s/.test(values.password)) {
+            errors.password = 'incorrectPasswordFormat';
+        }
+
+        return errors;
+    };
 
     const handleSubmit = (values: FormValues, { setSubmitting }: FormikHelpers<FormValues>) => {
         setSubmitting(true);
-        console.log(values);
-        setTimeout(() => {
-            setSubmitting(false);
-        }, 5000);
+        setLoginError(undefined);
+
+        axios.post<{
+            token: string;
+            user: Account;
+            status: string;
+        }>(`${RESTAPI_URL}/auth`, values)
+            .then((response) => {
+                const { token, user, status } = response.data;
+
+                localStorage.setItem('nm_auth_token', token);
+                Cookies.set('nm_auth_token', token, { expires: 7, path: '/', secure: true, sameSite: 'strict' });
+
+                axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+                dispatch(setCredentials({
+                    token: token,
+                    user: user,
+                    status: status as AuthStatus
+                }));
+
+                let destination = '/dashboard';
+                if (status === 'REQUIRES_SETUP') destination = '/login/setup';
+                else if (status === 'REQUIRES_PASSWORD_RESET') destination = '/login/reset';
+
+                if (callbackUrl) destination = callbackUrl;
+
+                router.push(destination);
+            })
+            .catch((err: unknown) => {
+                setSubmitting(false);
+                if (axios.isAxiosError(err)) {
+                    const message = err.response?.data?.message || 'invalidCredentials';
+                    setLoginError(message);
+                }
+            });
     };
 
     return (
@@ -76,7 +120,7 @@ export default function LoginPage() {
                                 {t("email")}
                             </label>
                             <Field
-                                type="email"
+                                type="text"
                                 name="email"
                                 disabled={isSubmitting}
                                 className={`

@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import preferencesReducer from './features/preferencesSlice';
-import popupReducer from './features/popupSlice'; // Importujemy nowy slice
+import popupReducer from './features/popupSlice';
+import accountReducer from './features/accountSlice';
 
 export const makeStore = () => {
     return configureStore({
         reducer: {
             preferences: preferencesReducer,
             popups: popupReducer,
+            account: accountReducer
         },
     });
 };

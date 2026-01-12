@@ -125,16 +125,15 @@ export const DatabaseVisual = () => {
 
 export const PermissionsVisual = () => {
     const users = [
-        { nameWidth: "w-20", roleColor: "bg-accent", roleWidth: "w-12" }, // Admin
-        { nameWidth: "w-24", roleColor: "bg-emerald-500", roleWidth: "w-14" }, // Editor
-        { nameWidth: "w-16", roleColor: "bg-blue-500", roleWidth: "w-10" }, // User
-        { nameWidth: "w-28", roleColor: "bg-blue-500", roleWidth: "w-10" }, // User
-        { nameWidth: "w-20", roleColor: "bg-secondary-gray", roleWidth: "w-12" }, // Guest
+        { nameWidth: "w-20", roleColor: "bg-accent", roleWidth: "w-12" },
+        { nameWidth: "w-24", roleColor: "bg-emerald-500", roleWidth: "w-14" },
+        { nameWidth: "w-16", roleColor: "bg-blue-500", roleWidth: "w-10" },
+        { nameWidth: "w-28", roleColor: "bg-blue-500", roleWidth: "w-10" },
+        { nameWidth: "w-20", roleColor: "bg-secondary-gray", roleWidth: "w-12" },
     ];
 
     return (
         <div className="w-full h-full bg-primary-white rounded-xl overflow-hidden flex flex-col shadow-lg">
-            {/* Header: User Management Title */}
             <div className="px-4 py-3 border-b border-secondary-gray/10 flex justify-between items-center bg-secondary-gray/5">
                 <div className="h-2 w-24 bg-secondary-gray/40 rounded-full" />
                 <div className="h-5 w-5 rounded-full border-2 border-accent border-t-transparent animate-spin-slow opacity-20" />
@@ -144,16 +143,12 @@ export const PermissionsVisual = () => {
                 {users.map((user, i) => (
                     <div key={i} className="flex items-center justify-between group">
                         <div className="flex items-center gap-3">
-                            {/* Avatar placeholder */}
                             <div className="w-7 h-7 rounded-full bg-secondary-gray/20 border border-secondary-gray/10" />
-                            {/* Nazwa użytkownika */}
                             <div className={`h-1.5 rounded-full bg-secondary-gray ${user.nameWidth}`} />
                         </div>
 
-                        {/* Rola (Badge) i Toggle */}
                         <div className="flex items-center gap-4">
                             <div className={`h-4 rounded-md opacity-40 ${user.roleColor} ${user.roleWidth}`} />
-                            {/* Prosty switch/toggle */}
                             <div className="w-7 h-3.5 bg-secondary-gray/20 rounded-full relative">
                                 <div className={`absolute top-0.5 left-0.5 w-2.5 h-2.5 rounded-full bg-white shadow-sm ${i < 2 ? 'translate-x-3.5 bg-accent/80' : ''} transition-all`} />
                             </div>
@@ -162,7 +157,6 @@ export const PermissionsVisual = () => {
                 ))}
             </div>
 
-            {/* Footer hint */}
             <div className="mt-auto p-3 bg-accent/5 flex gap-2">
                 <div className="h-1.5 w-full bg-accent/20 rounded-full" />
             </div>
@@ -171,7 +165,6 @@ export const PermissionsVisual = () => {
 };
 
 export const DeploymentVisual = () => {
-    // Etapy instalacji
     const steps = [
         { labelWidth: "w-24", status: "complete" },
         { labelWidth: "w-32", status: "complete" },
@@ -181,7 +174,6 @@ export const DeploymentVisual = () => {
 
     return (
         <div className="w-full h-full bg-primary-white rounded-xl overflow-hidden flex flex-col shadow-lg border border-black/5">
-            {/* Header z przyciskiem akcji */}
             <div className="px-4 py-3 border-b border-secondary-gray/10 flex items-center justify-between">
                 <div className="h-2 w-20 bg-secondary-gray/40 rounded-full" />
                 <div className="h-6 w-20 bg-accent rounded-md flex items-center justify-center shadow-sm shadow-accent/20">
@@ -190,23 +182,19 @@ export const DeploymentVisual = () => {
             </div>
 
             <div className="p-5 flex flex-col gap-6">
-                {/* Główny status / Progress Bar */}
                 <div className="flex flex-col gap-2">
                     <div className="flex justify-between items-end">
                         <div className="h-3 w-12 bg-accent/40 rounded-full" />
                         <div className="h-1.5 w-8 bg-secondary-gray/20 rounded-full" />
                     </div>
                     <div className="w-full h-2 bg-secondary-gray/10 rounded-full overflow-hidden relative">
-                        {/* Wypełnienie paska postępu */}
                         <div className="absolute top-0 left-0 h-full w-[65%] bg-accent transition-all duration-1000 shadow-[0_0_8px_rgba(var(--accent-rgb),0.5)]" />
                     </div>
                 </div>
 
-                {/* Lista zadań (Steps) */}
                 <div className="flex flex-col gap-4">
                     {steps.map((step, i) => (
                         <div key={i} className="flex items-center gap-4">
-                            {/* Ikona statusu */}
                             <div className={`w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center ${
                                 step.status === "complete" ? "bg-accent/20" :
                                     step.status === "loading" ? "border-2 border-accent border-t-transparent animate-spin" :
@@ -215,14 +203,12 @@ export const DeploymentVisual = () => {
                                 {step.status === "complete" && <div className="w-1.5 h-1.5 rounded-full bg-accent" />}
                             </div>
 
-                            {/* Tekst etapu */}
                             <div className={`h-1.5 rounded-full ${step.status === "pending" ? "bg-secondary-gray/20" : "bg-secondary-gray"} ${step.labelWidth}`} />
                         </div>
                     ))}
                 </div>
             </div>
 
-            {/* Terminal output (mały detal na dole) */}
             <div className="mt-auto mx-4 mb-4 p-2 bg-secondary-black rounded-lg flex flex-col gap-1.5 opacity-80">
                 <div className="flex gap-1">
                     <div className="h-1 w-3 bg-accent/60 rounded-full" />

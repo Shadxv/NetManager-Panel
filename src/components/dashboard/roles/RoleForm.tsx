@@ -217,7 +217,7 @@ export const RoleForm = ({ role }: { role: RoleDetails }) => {
                 <button
                     type="button"
                     onClick={() => setShowDeleteModal(true)}
-                    className="p-3 px-8 rounded-xl bg-red-primary/10 text-red-primary hover:bg-red-primary hover:text-white transition-all font-semibold"
+                    className="p-3 px-8 rounded-xl bg-red-primary/10 text-red-primary hover:bg-red-primary hover:text-white transition-all hover:cursor-pointer disabled:cursor-not-allowed"
                 >
                     {t("delete")}
                 </button>
@@ -227,7 +227,7 @@ export const RoleForm = ({ role }: { role: RoleDetails }) => {
                         type="button"
                         onClick={() => formik.handleSubmit()}
                         disabled={!formik.isValid || formik.isSubmitting || !formik.dirty}
-                        className="relative p-3 px-8 rounded-xl font-bold bg-accent text-primary-white disabled:bg-secondary-gray flex items-center justify-center"
+                        className="relative p-3 px-8 rounded-xl bg-accent text-primary-white disabled:bg-secondary-gray flex items-center justify-center hover:cursor-pointer disabled:cursor-not-allowed"
                     >
                         {formik.isSubmitting ? (
                             <div className="size-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -251,11 +251,11 @@ export const RoleForm = ({ role }: { role: RoleDetails }) => {
                     router.push(url);
                 }}
                 proceedLabel={t("unsavedChanges.proceed")}
-                onSave={async () => {
+                onRight={async () => {
                     await formik.submitForm();
                 }}
-                saveLabel={t("unsavedChanges.save")}
-                isSaving={formik.isSubmitting}
+                rightLabel={t("unsavedChanges.save")}
+                isLoading={formik.isSubmitting}
             />
 
             <AlertComponent
@@ -266,9 +266,9 @@ export const RoleForm = ({ role }: { role: RoleDetails }) => {
                 description={t("deleteAlert.description", { name: role.name })}
                 onProceed={handleDelete}
                 proceedLabel={t("deleteAlert.confirm")}
-                onSave={() => setShowDeleteModal(false)}
-                saveLabel={t("deleteAlert.cancel")}
-                isSaving={isDeleting}
+                onRight={() => setShowDeleteModal(false)}
+                rightLabel={t("deleteAlert.cancel")}
+                isLoading={isDeleting}
             />
         </div>
     );

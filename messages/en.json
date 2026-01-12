@@ -27,12 +27,33 @@
     "appearance": "Appearance",
     "appearanceDescription": "Switch between dark and light mode",
     "homePageExcluded": "Home page excluded",
-    "signIn": "Sign in"
+    "signIn": "Sign in",
+    "logout": "Logout"
   },
   "LoginPage": {
     "signIn": "Sign in",
     "email": "Email",
     "password": "Password"
+  },
+  "SetupPage": {
+    "setupAccount": "Set up your account",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm password",
+    "completeSetup": "Complete setup",
+    "successTitle": "You're all set!",
+    "successMessage": "Your account has been successfully configured. For security reasons, please log in again.",
+    "backToLogin": "Back to login"
+  },
+  "ResetPage": {
+    "resetPassword": "Reset password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm new password",
+    "updatePassword": "Update password",
+    "resetSuccessTitle": "Password changed",
+    "resetSuccessMessage": "Your password has been successfully updated. You can now log in again.",
+    "backToLogin": "Back to login"
   },
   "DashboardNavBar": {
     "preferences": "Preferences",
@@ -46,7 +67,8 @@
     "settings": "Settings",
     "database": "Database",
     "users": "Users",
-    "roles": "Roles"
+    "roles": "Roles",
+    "unknownUser": "Unknown user"
   },
   "Roles": {
     "title": "Roles",
@@ -175,7 +197,39 @@
       "from": "Invited after",
       "to": "Invited before",
       "unknown": "Unknown"
-    }
+    },
+
+    "role": "User's role",
+    "selectRole": "Choose role...",
+    "additionalPermissions": "Additional permissions",
+    "addPermission": "Add",
+    "saveChanges": "Save",
+    "unsavedChangesTitle": "Unsaved changes",
+    "unsavedChangesDescription": "You have unsaved changes and try to leave this page. What do you want to do?",
+    "discardChanges": "Discard changes",
+    "saveAndExit": "Save and leave",
+    "none": "No role",
+
+    "resetPasswordBtn": "Reset password",
+    "deleteUserBtn": "Delete user",
+    "deleteUserTitle": "Delete user",
+    "deleteUserDescription": "Are you sure you want to delete this user? This action cannot be undone.",
+    "deleteConfirm": "Delete permanently",
+    "resetPasswordTitle": "Reset password",
+    "resetPasswordDescription": "Do you want to send a new temporary password to the user's email address?",
+    "resetConfirm": "Send password",
+    "cancel": "Cancel",
+    "deleteUserSuccess": "User has been deleted",
+    "deleteUserError": "Error deleting user",
+    "resetPasswordSuccess": "Reset email has been sent",
+    "resetPasswordError": "Cannot reset password (temporary password still active)",
+
+    "createUser": "New user",
+    "email": "Email address",
+    "noRole": "No role",
+    "expiry": "Expiry",
+    "create": "Create",
+    "errorInvalidEmail": "Enter a valid email address"
   },
   "Errors": {
     "retry": "Retry",
@@ -184,6 +238,13 @@
     "passwordRequired": "Password is required",
     "incorrectEmailFormat": "Incorrect email format",
     "incorrectPasswordFormat": "Incorrect password format",
+    "nameRequired": "First name is required",
+    "surnameRequired": "Last name is required",
+    "mismatch": "Passwords do not match",
+    "updateError": "An error occurred while updating your data",
+    "resetError": "Failed to reset password",
+    "serverError": "Server error. Please try again later",
+    "invalidCredentials": "Invalid email or password",
     "404": {
       "title": "Not Found",
       "messages": {
@@ -208,6 +269,15 @@
     "errorRolePriority": "Error occured during changing role priority",
     "failedRefreshRoles": "Error occured during refreshing role list",
     "fetchingUsersError": "Error occured during fetching users",
-    "fetchingUserRoleError": "Error occured during fetching user role details"
+    "fetchingUserRoleError": "Error occured during fetching user role details",
+    "saveUserSuccess": "User updated successfully",
+    "saveUserError": "Failed to save user changes. Please try again.",
+    "sessionUpdated": "Your permissions have been updated",
+    "sessionExpired": "Session expired. Please log in again",
+    "userCreated": "User has been created",
+    "userCreateError": "Error occured during creating user",
+    "emailExists": "This email is already in the system",
+    "deleteUserSuccess": "Successfully deleted user",
+    "deleteUserError": "Error occured during deleting user"
   }
 }

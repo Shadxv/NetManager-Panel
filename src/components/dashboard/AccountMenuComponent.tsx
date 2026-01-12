@@ -8,6 +8,7 @@ import {setLanguage, setTheme} from "@lib/features/preferencesSlice";
 import Cookies from "js-cookie";
 import {useRouter} from "next/navigation";
 import {useTranslations} from "next-intl";
+import {logout} from "@lib/features/accountSlice";
 
 interface AccountMenuProp {
     isOpen: boolean;
@@ -38,6 +39,15 @@ export const AccountMenu = forwardRef<HTMLDivElement, AccountMenuProp>((props, r
 
         Cookies.set('NEXT_LOCALE', newLanguage, { expires: 365 });
         router.refresh();
+    };
+
+    const handleSignOut = () => {
+        Cookies.remove('nm_auth_token');
+
+        localStorage.removeItem('nm_auth_token');
+
+        dispatch(logout());
+        router.push('/login');
     };
 
     return (
@@ -80,7 +90,7 @@ export const AccountMenu = forwardRef<HTMLDivElement, AccountMenuProp>((props, r
                     </span>
                 </button>
 
-                <button className="w-full bg-accent text-primary-white hover:bg-primary-black dark:hover:bg-primary-white hover:text-primary-white dark:hover:text-accent text-sm py-2 rounded-xl transition-all">
+                <button onClick={handleSignOut} className="w-full bg-accent text-primary-white hover:bg-primary-black dark:hover:bg-primary-white hover:text-primary-white dark:hover:text-accent text-sm py-2 rounded-xl transition-all">
                     {t("signout")}
                 </button>
             </div>

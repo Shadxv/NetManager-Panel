@@ -12,6 +12,7 @@ import Cookies from "js-cookie";
 import {useRouter} from "next/navigation";
 import {useTranslations} from "next-intl";
 import {HamburgerIcon, Signet} from "@/components/icons";
+import {logout} from "@lib/features/accountSlice";
 
 export const HomeNavBar = () => {
     const [active, setActive] = useState(false);
@@ -59,6 +60,7 @@ export const HomeNavBar = () => {
     const dispatch = useDispatch();
     const theme = useSelector((state: RootState) => state.preferences.theme);
     const language = useSelector((state: RootState) => state.preferences.language);
+    const authState = useSelector((state: RootState) => state.account.status);
     const t = useTranslations("HomeNavBar")
 
     const toggleTheme = () => {
@@ -149,8 +151,20 @@ export const HomeNavBar = () => {
                         </div>
                     </div>
 
-                    <button className="mt-10 w-full py-3 bg-accent hover:bg-primary-white text-primary-white hover:text-accent font-bold rounded-xl shadow-lg shadow-accent/20 transition-all active:scale-[0.98]">
-                        {t("signIn")}
+                    <button onClick={
+                        authState === "IDLE" ?
+                            () => router.push("/login") :
+                            () => {
+                                Cookies.remove('nm_auth_token');
+                                localStorage.removeItem('nm_auth_token');
+                                dispatch(logout());
+                                router.refresh()
+                            }
+                    } className="mt-10 w-full py-3 bg-accent hover:bg-primary-white text-primary-white hover:text-accent font-bold rounded-xl shadow-lg shadow-accent/20 transition-all active:scale-[0.98]">
+                        {authState === "IDLE" ?
+                            t("signIn") :
+                            t("logout")
+                        }
                     </button>
                 </div>
             </div>

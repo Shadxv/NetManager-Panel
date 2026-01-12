@@ -6,6 +6,10 @@ import {AccountMenu, NavButton} from "@/components/dashboard";
 import {useEffect, useRef, useState} from "react";
 import {CloseIcon, HamburgerIcon, Logo, Signet} from "@/components/icons";
 import {useTranslations} from "next-intl";
+import {RootState} from "@lib/store";
+import {useSelector} from "react-redux";
+import {Account} from "@lib/features/accountSlice";
+import {Avatar} from "@/components/AvatarComponent";
 
 export const NavBar = () => {
 
@@ -16,6 +20,8 @@ export const NavBar = () => {
     const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false)
     const [isNavMenuOpen, setIsNavMenuOpen] = useState(false)
     const t = useTranslations("DashboardNavBar")
+
+    const user = useSelector((state: RootState): Account | null => state.account.user);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -69,7 +75,7 @@ export const NavBar = () => {
                     </div>
                 </button>
                 <button ref={accountMenuButtonRefMobile} onClick={toggleAccountMenu}>
-                    <div className="rounded-full bg-white size-8 shadow-sm shadow-primary-black/10"/>
+                    <Avatar size="size-8" src={user?.avatar}/>
                 </button>
                 <div className="absolute top-18 right-0">
                     <AccountMenu ref={accountMenuRefMobile} isOpen={isAccountMenuOpen}/>
@@ -115,14 +121,14 @@ export const NavBar = () => {
                                 className="flex items-center gap-4 p-2 rounded-2xl hover:bg-secondary-white/40 dark:hover:bg-secondary-white/10 w-full"
                                 onClick={toggleAccountMenu}
                             >
-                                <div className="size-10 rounded-full bg-white shrink-0"/>
+                                <Avatar size="size-10" src={user?.avatar}/>
 
                                 <div className="flex flex-col justify-start min-w-0 flex-1">
                                     <h2 className="text-primary-black dark:text-primary-white text-start truncate font-normal">
-                                        Kamil Sadowski
+                                        {user && user.name && user.surname ? `${user.name} ${user.surname}` : t("unknownUser")}
                                     </h2>
                                     <p className="text-secondary-black dark:text-secondary-white text-sm font-light text-start truncate opacity-60">
-                                        shadxw.kontakt@gmail.com
+                                        {user?.email || ""}
                                     </p>
                                 </div>
                             </button>

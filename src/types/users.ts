@@ -21,7 +21,7 @@ export interface UserDetails {
     name?: string;
     surname?: string;
     avatar?: string;
-    aditionalPermissions: string[];
+    additionalPermissions: string[];
     isProvisioned: boolean;
     tempPasswordExpires?: Date;
     createdBy: string;

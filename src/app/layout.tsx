@@ -7,6 +7,7 @@ import {cookies} from "next/headers";
 import {getMessages} from "next-intl/server";
 import StoreProvider from "@/components/StoreProvider";
 import ThemeWrapper from "@/components/ThemeWrapper";
+import {AuthGuard} from "@/components/AuthGuard";
 
 const poppins = Poppins({
     subsets: ['latin'],
@@ -36,7 +37,9 @@ export default async function RootLayout({
                     <ThemeWrapper>
                         <NextIntlClientProvider messages={messages} locale={language}>
                             <GsapRegistrar />
-                            {children}
+                            <AuthGuard>
+                                {children}
+                            </AuthGuard>
                         </NextIntlClientProvider>
                     </ThemeWrapper>
                 </StoreProvider>

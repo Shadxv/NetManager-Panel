@@ -15,7 +15,7 @@ export const SortDropdown = () => {
     return (
         <div className="relative inline-block text-left">
             <Listbox value={sortBy} onChange={setSortBy}>
-                <ListboxButton className="dashboard-small-btn bg-secondary-white/20 dark:bg-primary-gray text-muted-gray dark:text-secondary-white pr-10 pl-4 relative text-left min-w-40">
+                <ListboxButton className="dashboard-small-btn max-w-30 md:max-w-48 bg-secondary-white/20 dark:bg-primary-gray text-muted-gray dark:text-secondary-white pr-10 pl-4 relative text-left min-w-40">
                     <span className="truncate">
                         {t('sortByLabel')}: {t(sortBy)}
                     </span>
@@ -32,7 +32,7 @@ export const SortDropdown = () => {
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                 >
-                    <ListboxOptions className="absolute z-50 mt-2.5 w-full min-w-50 overflow-auto rounded-xl bg-primary-white dark:bg-primary-black py-2 shadow-lg  shadow-primary-black/10 border border-primary-black/10 dark:border-primary-white/10 focus:outline-none ring-1 ring-primary-white dark:ring-primary-black ring-opacity-5">
+                    <ListboxOptions className="absolute right-0 z-50 mt-2.5 w-full min-w-50 overflow-auto rounded-xl bg-primary-white dark:bg-primary-black py-2 shadow-lg  shadow-primary-black/10 border border-primary-black/10 dark:border-primary-white/10 focus:outline-none ring-1 ring-primary-white dark:ring-primary-black ring-opacity-5">
                         {options.map((option) => (
                             <ListboxOption
                                 key={option}

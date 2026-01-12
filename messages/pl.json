@@ -27,12 +27,33 @@
     "appearance": "Motyw",
     "appearanceDescription": "Zmień wygląd aplikacji na jasny lub ciemny",
     "homePageExcluded": "Nie dotyczy strony głównej",
-    "signIn": "Zaloguj się"
+    "signIn": "Zaloguj się",
+    "logout": "Wyloguj się"
   },
   "LoginPage": {
     "signIn": "Zaloguj się",
-    "email": "Email",
+    "email": "E-mail",
     "password": "Hasło"
+  },
+  "SetupPage": {
+    "setupAccount": "Skonfiguruj swoje konto",
+    "firstName": "Imię",
+    "lastName": "Nazwisko",
+    "newPassword": "Nowe hasło",
+    "confirmPassword": "Potwierdź hasło",
+    "completeSetup": "Zakończ konfigurację",
+    "successTitle": "Gotowe!",
+    "successMessage": "Twoje konto zostało skonfigurowane pomyślnie. Ze względów bezpieczeństwa prosimy o ponowne zalogowanie się.",
+    "backToLogin": "Wróć do logowania"
+  },
+  "ResetPage": {
+    "resetPassword": "Zresetuj hasło",
+    "newPassword": "Nowe hasło",
+    "confirmPassword": "Potwierdź nowe hasło",
+    "updatePassword": "Zaktualizuj hasło",
+    "resetSuccessTitle": "Hasło zmienione",
+    "resetSuccessMessage": "Twoje hasło zostało pomyślnie zaktualizowane. Możesz teraz zalogować się ponownie.",
+    "backToLogin": "Wróć do logowania"
   },
   "DashboardNavBar": {
     "preferences": "Preferencje",
@@ -46,7 +67,8 @@
     "settings": "Ustawienia",
     "database": "Baza danych",
     "users": "Użytkownicy",
-    "roles": "Role"
+    "roles": "Role",
+    "unknownUser": "Nieznany użytkownik"
   },
   "Roles": {
     "title": "Role",
@@ -175,15 +197,54 @@
       "from": "Zaproszony po",
       "to": "Zaproszony przed",
       "unknown": "Nieznany"
-    }
+    },
+
+    "role": "Rola użytkownika",
+    "selectRole": "Wybierz rolę...",
+    "additionalPermissions": "Dodatkowe uprawnienia",
+    "addPermission": "Dodaj",
+    "saveChanges": "Zapisz",
+    "unsavedChangesTitle": "Niezapisane zmiany",
+    "unsavedChangesDescription": "Opuszczasz stronę edycji, ale Twoje zmiany nie zostały jeszcze zapisane. Co chcesz zrobić?",
+    "discardChanges": "Odrzuć zmiany",
+    "saveAndExit": "Zapisz i wyjdź",
+    "none": "Bez roli",
+
+    "resetPasswordBtn": "Resetuj hasło",
+    "deleteUserBtn": "Usuń użytkownika",
+    "deleteUserTitle": "Usuwanie użytkownika",
+    "deleteUserDescription": "Czy na pewno chcesz usunąć tego użytkownika? Tej operacji nie można cofnąć.",
+    "deleteConfirm": "Usuń na zawsze",
+    "resetPasswordTitle": "Resetowanie hasła",
+    "resetPasswordDescription": "Czy wysłać nowe hasło tymczasowe na adres e-mail użytkownika?",
+    "resetConfirm": "Wyślij hasło",
+    "cancel": "Anuluj",
+    "deleteUserSuccess": "Użytkownik został usunięty",
+    "deleteUserError": "Błąd podczas usuwania użytkownika",
+    "resetPasswordSuccess": "E-mail z resetem został wysłany",
+    "resetPasswordError": "Nie można zresetować hasła (aktywne hasło tymczasowe)",
+
+    "createUser": "Nowy użytkownik",
+    "email": "Adres e-mail",
+    "noRole": "Brak roli",
+    "expiry": "Ważność",
+    "create": "Utwórz",
+    "errorInvalidEmail": "Podaj poprawny adres e-mail"
   },
   "Errors": {
     "retry": "Ponów próbę",
     "goBack": "Powrót",
-    "emailRequired": "Email jest wymagany",
+    "emailRequired": "E-mail jest wymagany",
     "passwordRequired": "Hasło jest wymagane",
-    "incorrectEmailFormat": "Niepoprawny format emaila",
+    "incorrectEmailFormat": "Niepoprawny format e-maila",
     "incorrectPasswordFormat": "Niepoprawny format hasła",
+    "nameRequired": "Imię jest wymagane",
+    "surnameRequired": "Nazwisko jest wymagane",
+    "mismatch": "Hasła nie są identyczne",
+    "updateError": "Wystąpił błąd podczas aktualizacji danych",
+    "resetError": "Nie udało się zresetować hasła",
+    "serverError": "Błąd serwera. Spróbuj ponownie później",
+    "invalidCredentials": "Nieprawidłowy e-mail lub hasło",
     "404": {
       "title": "Nie Znaleziono",
       "messages": {
@@ -206,6 +267,15 @@
     "deletedRole": "Pomyślnie usunięto role {name}",
     "errorDeletingRole": "Wystąpił błąd podczas usuwania roli {name}",
     "errorRolePriority": "Wystąpił błąd podczas zmieniania priorytetu roli",
-    "failedRefreshRoles": "Wystąpił błąd podczas odświeżania listy ról"
+    "failedRefreshRoles": "Wystąpił błąd podczas odświeżania listy ról",
+    "saveUserSuccess": "Pomyślnie zapisano zmiany dla użytkownika",
+    "saveUserError": "Wystąpił błąd podczas zapisywania zmian",
+    "sessionUpdated": "Twoje uprawnienia zostały zaktualizowane",
+    "sessionExpired": "Sesja wygasła. Zaloguj się ponownie",
+    "userCreated": "Użytkownik został utworzony",
+    "userCreateError": "Błąd podczas tworzenia użytkownika",
+    "emailExists": "Ten e-mail jest już w systemie",
+    "deleteUserSuccess": "Pomyślnie usunięto użytkownika",
+    "deleteUserError": "Wystąpił błąd podczas usuwania użytkownika"
   }
 }

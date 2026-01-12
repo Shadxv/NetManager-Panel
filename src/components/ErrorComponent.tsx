@@ -33,15 +33,6 @@ export const ErrorComponent = ({ error, reset, previous }: { error: Error, reset
                 </p>
 
                 <div className="flex items-center gap-4 mt-4">
-                    {/*<button*/}
-                    {/*    onClick={() => {*/}
-                    {/*        reset()*/}
-                    {/*    }}*/}
-                    {/*className="px-6 py-2.5 rounded-xl bg-accent text-primary-white hover:opacity-90 transition-all font-medium text-sm"*/}
-                    {/*    >*/}
-                    {/*    {t("retry")}*/}
-                    {/*</button>*/}
-
                     <button
                     onClick={() => router.push(previous)}
                     className="px-6 py-2.5 rounded-xl border border-muted-gray/20 dark:border-muted-white/20 text-secondary-black dark:text-secondary-white hover:bg-muted-gray/5 transition-all text-sm"

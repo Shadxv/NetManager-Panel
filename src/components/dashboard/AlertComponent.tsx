@@ -14,9 +14,10 @@ interface AlertProps {
     type?: 'warning' | 'info';
     onProceed?: () => void;
     proceedLabel?: string;
-    onSave?: () => void;
-    saveLabel?: string;
-    isSaving?: boolean;
+    onRight?: () => void;
+    rightLabel?: string;
+    isLoading?: boolean;
+    isLoadingOnRight?: boolean;
 }
 
 const subscribe = () => () => {};
@@ -69,20 +70,19 @@ export const AlertComponent = (props: AlertProps) => {
                         <button
                             type="button"
                             onClick={props.onProceed}
-                            className="flex-1 px-6 py-3 rounded-xl bg-red-primary text-white font-semibold order-2 sm:order-1 text-sm transition-all hover:brightness-110 active:scale-95 shadow-lg shadow-red-primary/20"
+                            className="flex-1 px-6 py-3 rounded-xl bg-red-primary text-white font-semibold order-2 sm:order-1 text-sm flex items-center justify-center transition-all hover:brightness-110 active:scale-95 shadow-lg shadow-red-primary/20"
                         >
-                            {props.proceedLabel}
+                            {(props.isLoading && props.isLoadingOnRight) ? <div className="size-3 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : props.proceedLabel}
                         </button>
                     )}
-                    {props.onSave && (
+                    {props.onRight && (
                         <button
                             type="button"
-                            onClick={props.onSave}
-                            disabled={props.isSaving}
-                            className="flex-1 px-6 py-3 rounded-xl bg-accent text-white font-semibold order-1 sm:order-2 text-sm flex items-center justify-center gap-2 transition-all hover:brightness-110 active:scale-95 disabled:opacity-50 shadow-lg shadow-accent/20"
+                            onClick={props.onRight}
+                            disabled={props.isLoading}
+                            className="flex-1 px-6 py-3 rounded-xl bg-accent text-white font-semibold order-1 sm:order-2 text-sm flex items-center justify-center transition-all hover:brightness-110 active:scale-95 disabled:opacity-50 shadow-lg shadow-accent/20"
                         >
-                            {props.isSaving && <div className="size-3 border-2 border-white/30 border-t-white rounded-full animate-spin" />}
-                            {props.saveLabel}
+                            {(props.isLoading && !props.isLoadingOnRight) ? <div className="size-3 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : props.rightLabel}
                         </button>
                     )}
                 </div>

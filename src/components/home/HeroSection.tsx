@@ -4,10 +4,12 @@ import { Image} from "next/dist/client/image-component";
 import {useRef} from "react";
 import {useGSAP} from "@gsap/react";
 import {gsap} from "gsap";
+import {useRouter} from "next/navigation";
 
 
 export const HeroSection = () => {
     const container = useRef(null);
+    const router = useRouter()
 
     useGSAP(() => {
         gsap.from(".element", {
@@ -27,7 +29,7 @@ export const HeroSection = () => {
                 <h1 className="element text-primary-white text-3xl md:text-4xl lg:text-6xl font-semibold">{t("titlePrefix1")} {t("title")}</h1>
                 <p className="element text-secondary-gray text-sm md:text-lg font-light">{t("description")}</p>
                 <div className="element">
-                    <button className="bg-accent rounded-xl p-2 px-6 text-primary-white font-semibold hover:text-accent hover:bg-primary-white hover:shadow-primary-white/50 hover:shadow-md mt-4 transition">{t("dashboardButton")}</button>
+                    <button onClick={() => router.push("/dashboard")} className="bg-accent rounded-xl p-2 px-6 text-primary-white font-semibold hover:text-accent hover:bg-primary-white hover:shadow-primary-white/50 hover:shadow-md mt-4 transition">{t("dashboardButton")}</button>
                 </div>
             </div>
             <div className="relative -z-10">
