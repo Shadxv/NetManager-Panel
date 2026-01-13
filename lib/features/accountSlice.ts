@@ -9,7 +9,7 @@ export interface Account {
     roleId?: string;
     roleIndex: number;
     permissions: number;
-    additionalPermissions: number;
+    additionalPermissions?: string[];
 }
 
 export type AuthStatus = 'IDLE' | 'AUTHENTICATED' | 'REQUIRES_SETUP' | 'REQUIRES_PASSWORD_RESET';

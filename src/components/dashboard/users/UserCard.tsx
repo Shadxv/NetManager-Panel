@@ -4,13 +4,16 @@ import {useTranslations} from "next-intl";
 import Link from "next/dist/client/link";
 import {getUserSubtext} from "@/utils";
 
-export const UserCard = ({ user, role } : { user: BaseUser, role?: BaseRole }) => {
+export const UserCard = ({ user, role, disabled } : { user: BaseUser, role?: BaseRole, disabled: boolean }) => {
     const t = useTranslations("Users");
 
     return (
         <Link
             href={`/dashboard/users/${user.id}`}
-            className="w-full flex flex-col gap-6 items-center p-6 rounded-2xl bg-primary-white dark:bg-primary-black/80 shadow-md shadow-primary-black/10 overflow-hidden hover:scale-102 transition-all duration-300"
+            aria-disabled={disabled}
+            className={`w-full flex flex-col gap-6 items-center p-6 rounded-2xl bg-primary-white dark:bg-primary-black/80 shadow-md shadow-primary-black/10 overflow-hidden transition-all duration-300
+                    ${disabled ? "pointer-events-none " : "hover:scale-102"}
+            `}
         >
             <div className="w-full flex flex-col gap-4 items-center min-w-0">
                 <Avatar size="size-16 md:size-20 lg:size-24" src={user.avatar}/>

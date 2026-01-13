@@ -106,7 +106,7 @@ export const NavBar = () => {
                 <div className="h-full w-full flex flex-col justify-between">
                     <div className="w-full flex flex-col gap-1">
                         {NavBarButtons.map(item => (
-                            <NavButton key={"navbutton-"+item.text.toLowerCase()} href={item.href} text={t(item.text)} icon={item.icon} hasSubpages={item.hasSubpages}/>
+                            <NavButton key={"navbutton-"+item.text.toLowerCase()} href={item.href} text={t(item.text)} icon={item.icon} hasSubpages={item.hasSubpages} requriedPermission={item.requriedPermission}/>
                         ))}
                     </div>
                     <div className="hidden w-full lg:flex flex-col">

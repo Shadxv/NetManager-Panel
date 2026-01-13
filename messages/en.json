@@ -163,9 +163,7 @@
     "createRoles": "Create roles",
     "createRolesDescription": "Allows to create new roles for the system",
     "deleteRoles": "Delete roles",
-    "deleteRolesDescription": "Allows to remove roles (only if not assigned to users)",
-    "applyRoles": "Apply roles",
-    "applyRolesDescription": "Allows to assign roles to specific user accounts"
+    "deleteRolesDescription": "Allows to remove roles (only if not assigned to users)"
   },
   "Users": {
     "noUsersFound": "No users found",
@@ -229,7 +227,10 @@
     "noRole": "No role",
     "expiry": "Expiry",
     "create": "Create",
-    "errorInvalidEmail": "Enter a valid email address"
+    "errorInvalidEmail": "Enter a valid email address",
+    "createdBy": "Created by:",
+    "createdAt": "Created at:",
+    "updatedAt": "Last update:"
   },
   "Errors": {
     "retry": "Retry",
@@ -245,6 +246,10 @@
     "resetError": "Failed to reset password",
     "serverError": "Server error. Please try again later",
     "invalidCredentials": "Invalid email or password",
+    "403": {
+      "title": "Forbidden",
+      "message": "You don't have access to this resource"
+    },
     "404": {
       "title": "Not Found",
       "messages": {

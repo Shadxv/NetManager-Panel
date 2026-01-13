@@ -10,6 +10,45 @@ import {
 
 export const RESTAPI_URL = "http://127.0.0.1:50001/api/v1"
 
+export enum PermissionFlags {
+    // SYSTEM
+    ADMIN = 1 << 0,
+
+    // SERVICES
+    READ_SERVICES = 1 << 1,
+    EDIT_SERVICES_CONFIGS = 1 << 2,
+    CREATE_NEW_SERVICES = 1 << 3,
+    DELETE_SERVICES = 1 << 4,
+    MANAGE_SERVICES_STATE = 1 << 5,
+    UPDATE_SERVICES = 1 << 6,
+
+    // FILES
+    READ_ALL_FILES = 1 << 7,
+    EDIT_ALL_FILES = 1 << 8,
+    DELETE_ALL_FILES = 1 << 9,
+
+    // SETTINGS
+    READ_APP_CONFIG = 1 << 10,
+    EDIT_APP_CONFIG = 1 << 11,
+
+    // DATABASE
+    READ_ALL_DATABASES = 1 << 12,
+    UPDATE_ALL_DATABASES = 1 << 13,
+    DELETE_ALL_DATABASES = 1 << 14,
+
+    // USERS
+    SEE_USERS_DETAILS = 1 << 15,
+    EDIT_USERS_DETAILS = 1 << 16,
+    CREATE_USERS = 1 << 17,
+    REMOVE_USERS = 1 << 18,
+    MANAGE_USERS = 1 << 19,
+
+    // ROLES
+    EDIT_ROLES = 1 << 20,
+    CREATE_ROLES = 1 << 21,
+    DELETE_ROLES = 1 << 22,
+}
+
 export const NavBarButtons = [
     {
         href: "/dashboard",
@@ -22,24 +61,57 @@ export const NavBarButtons = [
         text: "services",
         icon: ServicesIcon,
         hasSubpages: true,
+        requriedPermission: {
+            rolePermission: [
+                PermissionFlags.EDIT_SERVICES_CONFIGS,
+                PermissionFlags.DELETE_SERVICES,
+                PermissionFlags.UPDATE_SERVICES,
+                PermissionFlags.READ_SERVICES,
+                PermissionFlags.CREATE_NEW_SERVICES,
+                PermissionFlags.MANAGE_SERVICES_STATE,
+            ],
+            additionalPermission: "services"
+        }
     },
     {
         href: "/dashboard/files",
         text: "files",
         icon: FilesIcon,
         hasSubpages: false,
+        requriedPermission: {
+            rolePermission: [
+                PermissionFlags.DELETE_ALL_FILES,
+                PermissionFlags.EDIT_ALL_FILES,
+                PermissionFlags.READ_ALL_FILES,
+            ],
+            additionalPermission: "files"
+        }
     },
     {
         href: "/dashboard/settings",
         text: "settings",
         icon: SettingsIcon,
         hasSubpages: false,
+        requriedPermission: {
+            rolePermission: [
+                PermissionFlags.EDIT_APP_CONFIG,
+                PermissionFlags.READ_APP_CONFIG,
+            ],
+        }
     },
     {
         href: "/dashboard/database",
         text: "database",
         icon: DatabaseIcon,
         hasSubpages: false,
+        requriedPermission: {
+            rolePermission: [
+                PermissionFlags.DELETE_ALL_DATABASES,
+                PermissionFlags.READ_ALL_DATABASES,
+                PermissionFlags.UPDATE_ALL_DATABASES,
+            ],
+            additionalPermission: "database"
+        }
     },
     {
         href: "/dashboard/users",
@@ -114,7 +186,6 @@ export const PERMISSION_GROUPS = [
             { bit: 20, label: "editRoles"},
             { bit: 21, label: "createRoles"},
             { bit: 22, label: "deleteRoles"},
-            { bit: 23, label: "applyRoles"},
         ]
     }
 ];

@@ -14,6 +14,7 @@ import { useAppDispatch } from "@lib/hooks";
 import { addPopup } from "@lib/features/popupSlice";
 import { BaseUser, BaseRole } from "@/types";
 import {useUsers} from "@/components/dashboard/users/UsersContext";
+import {usePermissions} from "@/hooks";
 
 interface CreateUserModalProps {
     isOpen: boolean;
@@ -31,6 +32,8 @@ export const CreateUserModal = ({ isOpen, onClose }: CreateUserModalProps) => {
 
     const [serverError, setServerError] = useState<string | null>(null);
     const [allRoles, setAllRoles] = useState<BaseRole[]>([]);
+
+    const {canManageIndex} = usePermissions();
 
     useEffect(() => {
         if (isOpen) {
@@ -159,7 +162,7 @@ export const CreateUserModal = ({ isOpen, onClose }: CreateUserModalProps) => {
 
                                     <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
                                         <ListboxOptions className="absolute z-50 mt-2 w-full bg-primary-white dark:bg-primary-black rounded-xl shadow-2xl border border-primary-black/10 dark:border-primary-white/10 py-2 max-h-60 overflow-auto">
-                                            {allRoles.map((role) => (
+                                            {allRoles.filter(role => canManageIndex(role.index)).map((role) => (
                                                 <ListboxOption key={role.id} value={role.id}>
                                                     {({ selected, focus }) => (
                                                         <div className={`cursor-pointer py-2.5 px-4 flex items-center justify-between ${focus ? 'bg-secondary-white/10' : ''} ${selected ? 'bg-accent/5' : ''}`}>

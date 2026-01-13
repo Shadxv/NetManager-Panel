@@ -9,6 +9,17 @@ import axios from 'axios';
 import { RESTAPI_URL } from "@/constants";
 import Cookies from "js-cookie";
 
+axios.interceptors.request.use((config) => {
+    const token = typeof window !== 'undefined' ? localStorage.getItem('nm_auth_token') : null;
+
+    if (token) {
+        config.headers.set('Authorization', `Bearer ${token}`);
+    }
+
+    config.timeout = 30000;
+    return config;
+});
+
 export default function StoreProvider({ children, initialData }: { children: React.ReactNode, initialData: { theme: 'light' | 'dark', language: 'pl' | 'en' } }) {
     const [store] = useState<AppStore>(() => {
         const newStore = makeStore();

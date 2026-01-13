@@ -70,8 +70,6 @@ export default function LoginPage() {
                 localStorage.setItem('nm_auth_token', token);
                 Cookies.set('nm_auth_token', token, { expires: 7, path: '/', secure: true, sameSite: 'strict' });
 
-                axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
                 dispatch(setCredentials({
                     token: token,
                     user: user,

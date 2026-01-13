@@ -2,8 +2,8 @@
 
 import { RoleDetails } from "@/types";
 import { useFormik } from "formik";
-import { PERMISSION_GROUPS, RESTAPI_URL } from "@/constants";
-import React, { useEffect, useState } from "react";
+import { PERMISSION_GROUPS, RESTAPI_URL, PermissionFlags } from "@/constants";
+import React, { useEffect, useState, useMemo, Fragment } from "react";
 import { useTranslations } from "next-intl";
 import axios from "axios";
 import { useRouter, usePathname } from "next/navigation";
@@ -11,6 +11,7 @@ import { useRoles } from "@/components/dashboard/roles/RolesContext";
 import { useAppDispatch } from "@lib/hooks";
 import { addPopup } from "@lib/features/popupSlice";
 import { AlertComponent } from "@/components/dashboard";
+import { usePermissions } from "@/hooks";
 
 interface FormErrors {
     name?: string;
@@ -40,13 +41,22 @@ export const RoleForm = ({ role }: { role: RoleDetails }) => {
     const dispatch = useAppDispatch();
     const { removeRoleLocal, updateRoleLocal } = useRoles();
 
+    const { hasPermission, canManageIndex, canAssignBit } = usePermissions();
+
+    const canEditThisRole = useMemo(() => {
+        return hasPermission(PermissionFlags.EDIT_ROLES) && canManageIndex(role.index);
+    }, [role.index, hasPermission, canManageIndex]);
+
+    const canDeleteThisRole = useMemo(() => {
+        return hasPermission(PermissionFlags.DELETE_ROLES) && canManageIndex(role.index);
+    }, [role.index, hasPermission, canManageIndex]);
+
     const [showLeaveModal, setShowLeaveModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
 
     const formik = useFormik<RoleDetails>({
         initialValues: { ...role },
-        enableReinitialize: true,
         validate: (values) => {
             const errors: FormErrors = {};
             const nameRegex = /^[a-zA-Z0-9\-_\.\(\)\s]+$/;
@@ -61,7 +71,9 @@ export const RoleForm = ({ role }: { role: RoleDetails }) => {
 
             return errors;
         },
-        onSubmit: async (values) => {
+        onSubmit: async (values, { resetForm, setSubmitting }) => {
+            if (!canEditThisRole) return;
+
             const changedFields: RoleUpdatePayload = {};
             (Object.keys(values) as Array<keyof RoleDetails>).forEach((key) => {
                 if (key !== 'id' && values[key] !== role[key]) {
@@ -72,10 +84,16 @@ export const RoleForm = ({ role }: { role: RoleDetails }) => {
             if (Object.keys(changedFields).length === 0) return;
 
             try {
-                await axios.patch(`${RESTAPI_URL}/roles/${role.id}`, changedFields, { timeout: 5000 });
+                await axios.patch(`${RESTAPI_URL}/roles/${role.id}`, changedFields);
+
                 updateRoleLocal(role.id, changedFields);
 
-                formik.resetForm({ values });
+                resetForm({
+                    values: { ...values },
+                    isSubmitting: false,
+                    touched: {}
+                });
+
                 dispatch(addPopup({ type: "success", message: "savedChangesRole", params: { name: values.name } }));
 
                 if (window.nextStepUrl) {
@@ -85,14 +103,17 @@ export const RoleForm = ({ role }: { role: RoleDetails }) => {
                 }
             } catch (e) {
                 dispatch(addPopup({ type: "error", message: "errorChangesRole" }));
+            } finally {
+                setSubmitting(false);
             }
         }
     });
 
     const handleDelete = async () => {
+        if (!canDeleteThisRole) return;
         setIsDeleting(true);
         try {
-            await axios.delete(`${RESTAPI_URL}/roles/${role.id}`, { timeout: 5000 });
+            await axios.delete(`${RESTAPI_URL}/roles/${role.id}`);
             removeRoleLocal(role.id);
             formik.resetForm();
             router.push("/dashboard/roles");
@@ -137,97 +158,105 @@ export const RoleForm = ({ role }: { role: RoleDetails }) => {
 
     return (
         <div className="flex flex-col gap-12">
-            <div className="flex flex-col md:flex-row gap-8">
-                <div>
-                    <label className="form-label">{t("name")}</label>
-                    <input
-                        name="name"
-                        type="text"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.name}
-                        disabled={formik.isSubmitting}
-                        className={`${formik.errors.name && formik.touched.name ? 'form-input-error' : 'form-input'}`}
-                    />
-                    {formik.errors.name && formik.touched.name && (
-                        <span className="text-red-primary text-xs font-medium mt-1 inline-block">
-                            {t(formik.errors.name)}
-                        </span>
-                    )}
-                </div>
-
-                <div>
-                    <label className="form-label">{t("color")}</label>
-                    <div className="flex gap-2">
+            <fieldset disabled={!canEditThisRole || formik.isSubmitting} className="contents">
+                <div className="flex flex-col md:flex-row gap-8">
+                    <div>
+                        <label className="form-label">{t("name")}</label>
                         <input
-                            name="color"
-                            type="color"
-                            onChange={formik.handleChange}
-                            value={formik.values.color}
-                            disabled={formik.isSubmitting}
-                            className="size-7 outline-none border-none bg-transparent cursor-pointer"
-                        />
-                        <input
-                            name="color"
+                            name="name"
                             type="text"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
-                            value={formik.values.color}
-                            disabled={formik.isSubmitting}
-                            className={`${formik.errors.color && formik.touched.color ? 'form-input-error' : 'form-input'}`}
+                            value={formik.values.name}
+                            className={`${formik.errors.name && formik.touched.name ? 'form-input-error' : 'form-input'} disabled:opacity-50 disabled:cursor-not-allowed`}
                         />
+                        {formik.errors.name && formik.touched.name && (
+                            <span className="text-red-primary text-xs font-medium mt-1 inline-block">
+                                {t(formik.errors.name)}
+                            </span>
+                        )}
+                    </div>
+
+                    <div>
+                        <label className="form-label">{t("color")}</label>
+                        <div className="flex gap-2">
+                            <input
+                                name="color"
+                                type="color"
+                                onChange={formik.handleChange}
+                                value={formik.values.color}
+                                className="size-7 outline-none border-none bg-transparent cursor-pointer disabled:opacity-50"
+                            />
+                            <input
+                                name="color"
+                                type="text"
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.color}
+                                className={`${formik.errors.color && formik.touched.color ? 'form-input-error' : 'form-input'} disabled:opacity-50 disabled:cursor-not-allowed`}
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div className="flex flex-col gap-6">
-                <h1 className="text-xl font-bold text-primary-black dark:text-primary-white">{t("permissions")}</h1>
-                <div className="w-full h-0.5 bg-muted-gray/10 dark:bg-primary-white/10" />
+                <div className="flex flex-col gap-6">
+                    <h1 className="text-xl font-bold text-primary-black dark:text-primary-white">{t("permissions")}</h1>
+                    <div className="w-full h-0.5 bg-muted-gray/10 dark:bg-primary-white/10" />
 
-                {PERMISSION_GROUPS.map((group) => (
-                    <div key={group.category} className="flex flex-col gap-4">
-                        <h1 className="text-lg text-secondary-black dark:text-secondary-white mt-4">
-                            {t(`${group.category}Category`)}
-                        </h1>
-                        {group.permissions.map((p) => {
-                            const bitValue = Math.pow(2, p.bit);
-                            const isChecked = (formik.values.permissions & bitValue) !== 0;
-                            return (
-                                <PermissionToggle
-                                    key={`perm-${p.bit}`}
-                                    label={t(p.label)}
-                                    description={t(`${p.label}Description`)}
-                                    isChecked={isChecked}
-                                    disabled={formik.isSubmitting}
-                                    onChange={() => {
-                                        const newVal = isChecked
-                                            ? formik.values.permissions - bitValue
-                                            : formik.values.permissions + bitValue;
-                                        formik.setFieldValue("permissions", newVal >>> 0);
-                                    }}
-                                />
-                            );
-                        })}
-                        <div className="w-full h-0.5 bg-muted-gray/10 dark:bg-primary-white/10" />
-                    </div>
-                ))}
-            </div>
+                    {PERMISSION_GROUPS.map((group) => (
+                        <div key={group.category} className="flex flex-col gap-4">
+                            <h1 className="text-lg text-secondary-black dark:text-secondary-white mt-4">
+                                {t(`${group.category}Category`)}
+                            </h1>
+                            {group.permissions.map((p) => {
+                                const bitValue = Math.pow(2, p.bit);
+                                const isChecked = (formik.values.permissions & bitValue) !== 0;
+
+                                const userHasBit = canAssignBit(bitValue);
+
+                                return (
+                                    <PermissionToggle
+                                        key={`perm-${p.bit}`}
+                                        label={t(p.label)}
+                                        description={t(`${p.label}Description`)}
+                                        isChecked={isChecked}
+                                        disabled={!canEditThisRole || !userHasBit || formik.isSubmitting}
+                                        onChange={() => {
+                                            const newVal = isChecked
+                                                ? formik.values.permissions - bitValue
+                                                : formik.values.permissions + bitValue;
+                                            formik.setFieldValue("permissions", newVal >>> 0);
+                                        }}
+                                    />
+                                );
+                            })}
+                            <div className="w-full h-0.5 bg-muted-gray/10 dark:bg-primary-white/10" />
+                        </div>
+                    ))}
+                </div>
+            </fieldset>
 
             <div className="flex justify-between items-center">
-                <button
-                    type="button"
-                    onClick={() => setShowDeleteModal(true)}
-                    className="p-3 px-8 rounded-xl bg-red-primary/10 text-red-primary hover:bg-red-primary hover:text-white transition-all hover:cursor-pointer disabled:cursor-not-allowed"
-                >
-                    {t("delete")}
-                </button>
+                {canDeleteThisRole ? (
+                    <button
+                        type="button"
+                        onClick={() => setShowDeleteModal(true)}
+                        className="p-3 px-8 rounded-xl bg-red-primary/10 text-red-primary hover:bg-red-primary hover:text-white transition-all hover:cursor-pointer"
+                    >
+                        {t("delete")}
+                    </button>
+                ) : <div />}
 
                 <div className="flex gap-4">
                     <button
                         type="button"
                         onClick={() => formik.handleSubmit()}
-                        disabled={!formik.isValid || formik.isSubmitting || !formik.dirty}
-                        className="relative p-3 px-8 rounded-xl bg-accent text-primary-white disabled:bg-secondary-gray flex items-center justify-center hover:cursor-pointer disabled:cursor-not-allowed"
+                        disabled={!formik.isValid || formik.isSubmitting || !formik.dirty || !canEditThisRole}
+                        className={`relative p-3 px-8 rounded-xl bg-accent text-primary-white flex items-center justify-center transition-all 
+                            ${(!formik.isValid || formik.isSubmitting || !formik.dirty || !canEditThisRole)
+                            ? "bg-secondary-gray cursor-not-allowed opacity-70"
+                            : "hover:cursor-pointer hover:bg-primary-black dark:hover:bg-primary-white dark:hover:text-accent"
+                        }`}
                     >
                         {formik.isSubmitting ? (
                             <div className="size-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -275,7 +304,7 @@ export const RoleForm = ({ role }: { role: RoleDetails }) => {
 };
 
 const PermissionToggle = ({ label, description, isChecked, onChange, disabled }: PermissionToggleProps) => (
-    <div className="flex gap-6 items-center justify-between p-5 bg-primary-white dark:bg-primary-black/20 rounded-2xl">
+    <div className={`flex gap-6 items-center justify-between p-5 bg-primary-white dark:bg-primary-black/20 rounded-2xl transition-opacity ${disabled ? 'opacity-60' : 'opacity-100'}`}>
         <div className="flex flex-col gap-1 pr-4 text-left">
             <span className="text-primary-black dark:text-primary-white font-bold text-sm md:text-base">
                 {label}
@@ -292,7 +321,7 @@ const PermissionToggle = ({ label, description, isChecked, onChange, disabled }:
                 relative inline-flex h-7 w-12 shrink-0 rounded-full border-2 border-transparent 
                 transition-colors duration-300 ease-in-out 
                 ${isChecked ? 'bg-accent' : 'bg-gray-300 dark:bg-zinc-800'} 
-                disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer
+                ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}
             `}
         >
             <span className={`

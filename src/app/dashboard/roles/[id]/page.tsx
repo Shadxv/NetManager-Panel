@@ -6,6 +6,7 @@ import { getTranslations } from "next-intl/server";
 import axios from "axios";
 import { RESTAPI_URL } from "@/constants";
 import {RequestError, RoleDetails} from "@/types";
+import {cookies} from "next/headers";
 
 interface RoleDetailsProp {
     params: Promise<{ id: string }>;
@@ -14,8 +15,15 @@ interface RoleDetailsProp {
 export default async function RoleDetailsPage({ params }: RoleDetailsProp) {
     const t = await getTranslations("Roles");
     const id = (await params).id;
+    const cookieStore = await cookies();
+    const token = cookieStore.get('nm_auth_token')?.value;
 
-    const role: RoleDetails | RequestError = await axios.get<RoleDetails>(`${RESTAPI_URL}/roles/${id}`, { timeout: 5000 })
+    const role: RoleDetails | RequestError = await axios.get<RoleDetails>(`${RESTAPI_URL}/roles/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+        timeout: 30000
+    })
         .then((res) => {
             return res.data;
         }).catch((e) => {

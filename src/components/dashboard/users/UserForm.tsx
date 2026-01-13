@@ -4,13 +4,16 @@ import React, { useState, useRef, useEffect, Fragment } from 'react';
 import { Formik, Form, FieldArray, FormikProps, FormikState } from 'formik';
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition } from '@headlessui/react';
 import { useTranslations } from 'next-intl';
-import { BaseRole, UserDetails } from "@/types";
-import { RESTAPI_URL } from "@/constants";
+import {BaseRole, BaseUser, UserDetails} from "@/types";
+import {PermissionFlags, RESTAPI_URL} from "@/constants";
 import axios from 'axios';
 import { useRouter, usePathname } from "next/navigation";
 import { AlertComponent } from "@/components/dashboard";
 import { useAppDispatch } from "@lib/hooks";
 import { addPopup } from "@lib/features/popupSlice";
+import {formatDate} from "@/utils";
+import {Avatar} from "@/components/AvatarComponent";
+import {usePermissions} from "@/hooks";
 
 declare global {
     interface Window {
@@ -23,7 +26,7 @@ interface UserUpdatePayload {
     additionalPermissions: string[];
 }
 
-export const UserForm = ({ user }: { user: UserDetails }) => {
+export const UserForm = ({ user, createdBy }: { user: UserDetails, createdBy?: Partial<BaseUser> }) => {
     const t = useTranslations("Users");
     const router = useRouter();
     const pathname = usePathname();
@@ -36,6 +39,8 @@ export const UserForm = ({ user }: { user: UserDetails }) => {
     const [showLeaveModal, setShowLeaveModal] = useState(false);
 
     const formikRef = useRef<FormikProps<UserDetails>>(null);
+
+    const { hasPermission, canManageIndex } = usePermissions();
 
     useEffect(() => {
         axios.get<BaseRole[]>(`${RESTAPI_URL}/roles`)
@@ -73,6 +78,24 @@ export const UserForm = ({ user }: { user: UserDetails }) => {
         return () => document.removeEventListener('click', handleClick, true);
     }, [pathname]);
 
+    const canEdit = React.useMemo(() => {
+        const basePermission = hasPermission([
+            PermissionFlags.MANAGE_USERS,
+            PermissionFlags.EDIT_USERS_DETAILS
+        ]);
+
+        if (!basePermission) return false;
+
+        if (user.roleId) {
+            if (availableRoles.length === 0) return basePermission;
+
+            const targetRole = availableRoles.find(role => role.id === user.roleId);
+            return canManageIndex(targetRole?.index);
+        }
+
+        return basePermission;
+    }, [availableRoles, user.roleId, hasPermission, canManageIndex]);
+
     const handleFinalize = (values: string[], setFieldValue: (field: string, value: string[]) => void) => {
         const trimmed = tempValue.trim();
         if (trimmed && !values.includes(trimmed)) {
@@ -86,7 +109,8 @@ export const UserForm = ({ user }: { user: UserDetails }) => {
 
     const handleFormSubmit = (
         values: UserDetails,
-        resetForm: (nextState?: Partial<FormikState<UserDetails>>) => void
+        resetForm: (nextState?: Partial<FormikState<UserDetails>>) => void,
+        setSubmitting: (isSubmitting: boolean) => void
     ) => {
         const payload: UserUpdatePayload = {
             roleId: values.roleId,
@@ -107,22 +131,45 @@ export const UserForm = ({ user }: { user: UserDetails }) => {
             })
             .catch(() => {
                 dispatch(addPopup({ type: "error", message: "saveUserError" }));
+            })
+            .finally(() => {
+                setSubmitting(false);
             });
     };
 
     return (
         <>
+            <div className="flex flex-col text-primary-gray/70 dark:text-secondary-gray text-sm gap-2">
+                <div>
+                    <p>{t("createdAt")} {formatDate(user.createdAt)}</p>
+                    <p>{t("updatedAt")} {formatDate(user.updatedAt)}</p>
+                </div>
+                <div className="flex flex-col gap-2">
+                    <p>{t("createdBy")}</p>
+                    <div className="flex gap-2 text-primary-gray dark:text-secondary-white items-center">
+                        {!createdBy ? "System" :
+                            <>
+                             <Avatar size="size-6" src={createdBy.avatar}/>
+                             <p>{!createdBy.name || !createdBy.surname ? createdBy.email : `${createdBy.name} ${createdBy.surname}`}</p>
+                            </>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div className="w-full h-0.5 bg-muted-gray/10 dark:bg-primary-white/10 my-2" />
+
             <Formik
                 innerRef={formikRef}
                 initialValues={{...user, additionalPermissions: [...user.additionalPermissions].sort()}}
-                onSubmit={(values, { resetForm }) => handleFormSubmit(values, resetForm)}
+                onSubmit={(values, { resetForm, setSubmitting }) => handleFormSubmit(values, resetForm, setSubmitting)}
             >
                 {({ values, setFieldValue, dirty, isSubmitting, submitForm, resetForm, initialValues }) => (
                     <Form className="flex flex-col gap-8 w-full">
 
                         <div className="flex flex-col gap-2 max-w-3xl">
                             <label className="form-label">{t('role')}</label>
-                            <Listbox value={values.roleId} onChange={(val: string | null) => setFieldValue('roleId', val)}>
+                            <Listbox value={values.roleId} disabled={!canEdit || isSubmitting} onChange={(val: string | null) => setFieldValue('roleId', val)}>
                                 <div className="relative">
                                     <ListboxButton className="form-input flex items-center justify-between w-full transition-all p-2 cursor-pointer">
                                         <div className="flex items-center gap-3">
@@ -140,7 +187,7 @@ export const UserForm = ({ user }: { user: UserDetails }) => {
 
                                     <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
                                         <ListboxOptions className="absolute z-50 mt-2 w-full bg-primary-white dark:bg-primary-black rounded-xl shadow-2xl border border-primary-black/10 dark:border-primary-white/10 py-2 focus:outline-none max-h-60 overflow-auto">
-                                            {availableRoles.map((role) => (
+                                            {availableRoles.filter(role => canManageIndex(role.index)).map((role) => (
                                                 <ListboxOption key={role.id} value={role.id}>
                                                     {({ selected, focus }) => (
                                                         <div className={`cursor-pointer select-none py-2.5 px-4 flex items-center justify-between transition-colors ${focus ? 'bg-secondary-white/10' : ''} ${selected ? 'bg-accent/5' : ''}`}>
@@ -175,13 +222,13 @@ export const UserForm = ({ user }: { user: UserDetails }) => {
 
                         <div className="flex flex-col gap-3">
                             <label className="form-label">{t('additionalPermissions')}</label>
-                            <div className="p-3 rounded-2xl border border-primary-black/10 dark:border-primary-white/10 bg-secondary-white/5 min-h-[120px] flex flex-wrap gap-2.5 content-start transition-all focus-within:border-accent/40">
+                            <div className={`p-3 rounded-2xl border border-primary-black/10 dark:border-primary-white/10 bg-secondary-white/5 min-h-30 flex flex-wrap gap-2.5 content-start transition-all ${canEdit ? 'focus-within:border-accent/40' : ''}`}>
                                 <FieldArray name="additionalPermissions">
                                     {({ remove }) => (
                                         <>
                                             {values.additionalPermissions.map((perm, index) => (
                                                 <div key={perm} className="group flex items-center gap-2 px-4 pr-2 py-1.5 bg-primary-white dark:bg-secondary-black rounded-full border border-primary-black/5 dark:border-primary-white/10 hover:border-accent/40 hover:shadow-sm transition-all max-w-full">
-                                                    {editingIndex === index ? (
+                                                    {editingIndex === index && canEdit ? (
                                                         <div className="relative flex items-center min-w-5 max-w-full overflow-hidden">
                                                             <span className="invisible whitespace-pre text-xs px-1">{tempValue || " "}</span>
                                                             <input
@@ -195,33 +242,48 @@ export const UserForm = ({ user }: { user: UserDetails }) => {
                                                         </div>
                                                     ) : (
                                                         <>
-                                                            <span className="text-xs dark:text-primary-white cursor-pointer truncate max-w-full" onClick={() => { setEditingIndex(index); setTempValue(perm); }}>
+                                                            <span
+                                                                className={`text-xs dark:text-primary-white truncate max-w-full ${canEdit ? 'cursor-pointer' : 'cursor-default'}`}
+                                                                onClick={() => {
+                                                                    if (canEdit) {
+                                                                        setEditingIndex(index);
+                                                                        setTempValue(perm);
+                                                                    }
+                                                                }}
+                                                            >
                                                                 {perm}
                                                             </span>
-                                                            <button type="button" onClick={() => remove(index)} className="opacity-0 group-hover:opacity-100 flex items-center justify-center p-0.5 hover:bg-accent/10 rounded-full transition-all text-accent shrink-0">
-                                                                <svg className="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" /></svg>
-                                                            </button>
+                                                            {canEdit && (
+                                                                <button type="button" onClick={() => remove(index)} className="opacity-0 group-hover:opacity-100 flex items-center justify-center p-0.5 hover:bg-accent/10 rounded-full transition-all text-accent shrink-0">
+                                                                    <svg className="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" /></svg>
+                                                                </button>
+                                                            )}
                                                         </>
                                                     )}
                                                 </div>
                                             ))}
-                                            {isAdding ? (
-                                                <div className="relative flex items-center px-4 py-1.5 rounded-full border border-accent bg-transparent min-w-15 max-w-full">
-                                                    <span className="invisible whitespace-pre text-xs px-1">{tempValue || " "}</span>
-                                                    <input
-                                                        autoFocus
-                                                        className="absolute inset-0 bg-transparent outline-none text-xs w-full dark:text-primary-white px-4"
-                                                        value={tempValue}
-                                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTempValue(e.target.value)}
-                                                        onBlur={() => handleFinalize(values.additionalPermissions, setFieldValue)}
-                                                        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && handleFinalize(values.additionalPermissions, setFieldValue)}
-                                                    />
-                                                </div>
-                                            ) : (
-                                                <button type="button" onClick={() => setIsAdding(true)} className="px-4 py-1.5 rounded-full border border-dashed border-primary-black/20 dark:border-primary-white/20 text-[10px] font-bold text-muted-gray hover:border-accent hover:text-accent transition-all flex items-center gap-1.5 cursor-pointer">
-                                                    <svg className="size-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M12 4v16m8-8H4" /></svg>
-                                                    {t('addPermission').toUpperCase()}
-                                                </button>
+
+                                            {canEdit && (
+                                                <>
+                                                    {isAdding ? (
+                                                        <div className="relative flex items-center px-4 py-1.5 rounded-full border border-accent bg-transparent min-w-15 max-w-full">
+                                                            <span className="invisible whitespace-pre text-xs px-1">{tempValue || " "}</span>
+                                                            <input
+                                                                autoFocus
+                                                                className="absolute inset-0 bg-transparent outline-none text-xs w-full dark:text-primary-white px-4"
+                                                                value={tempValue}
+                                                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTempValue(e.target.value)}
+                                                                onBlur={() => handleFinalize(values.additionalPermissions, setFieldValue)}
+                                                                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && handleFinalize(values.additionalPermissions, setFieldValue)}
+                                                            />
+                                                        </div>
+                                                    ) : (
+                                                        <button type="button" onClick={() => setIsAdding(true)} className="px-4 py-1.5 rounded-full border border-dashed border-primary-black/20 dark:border-primary-white/20 text-[10px] font-bold text-muted-gray hover:border-accent hover:text-accent transition-all flex items-center gap-1.5 cursor-pointer">
+                                                            <svg className="size-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M12 4v16m8-8H4" /></svg>
+                                                            {t('addPermission').toUpperCase()}
+                                                        </button>
+                                                    )}
+                                                </>
                                             )}
                                         </>
                                     )}
@@ -233,7 +295,7 @@ export const UserForm = ({ user }: { user: UserDetails }) => {
                             <button
                                 type="button"
                                 onClick={() => submitForm()}
-                                disabled={isSubmitting || !dirty}
+                                disabled={!canEdit || isSubmitting || !dirty}
                                 className={`
                                 flex justify-center items-center p-3 px-8 rounded-xl transition-all duration-300 shadow-lg
                                 ${(isSubmitting || !dirty)

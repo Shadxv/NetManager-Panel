@@ -1,16 +1,17 @@
 'use client'
 
-import React, { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
-import { PlusIcon } from "@/components/icons";
-import { usePathname, useRouter } from "next/navigation";
-import { RoleListContainer } from "@/components/dashboard/roles/RoleListContainer";
-import { BaseRole } from "@/types";
+import React, {useEffect, useState} from "react";
+import {useTranslations} from "next-intl";
+import {PlusIcon} from "@/components/icons";
+import {usePathname, useRouter} from "next/navigation";
+import {RoleListContainer} from "@/components/dashboard/roles/RoleListContainer";
+import {BaseRole} from "@/types";
 import axios from "axios";
-import { RESTAPI_URL } from "@/constants";
+import {PermissionFlags, RESTAPI_URL} from "@/constants";
 import {RolesProvider, useRoles} from "@/components/dashboard/roles";
 import {useAppDispatch} from "@lib/hooks";
 import {addPopup} from "@lib/features/popupSlice";
+import {usePermissions} from "@/hooks";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
@@ -28,6 +29,10 @@ function RolesLayoutContent({ children }: { children: React.ReactNode }) {
     const path = usePathname();
     const dispatch = useAppDispatch()
 
+    const { hasPermission } = usePermissions()
+
+    const canCreate = hasPermission(PermissionFlags.CREATE_ROLES)
+
     useEffect(() => {
         refreshRoles();
     }, []);
@@ -35,7 +40,7 @@ function RolesLayoutContent({ children }: { children: React.ReactNode }) {
     const handleCreateRole = async () => {
         setIsCreating(true);
 
-        await axios.post<BaseRole>(`${RESTAPI_URL}/roles`, {}, {timeout: 5000})
+        await axios.post<BaseRole>(`${RESTAPI_URL}/roles`)
             .then((res) => {
                 const newRole = res.data
                 setRoles(prev => [...prev, newRole]);
@@ -55,7 +60,7 @@ function RolesLayoutContent({ children }: { children: React.ReactNode }) {
 
             <div className="w-full flex-1 min-h-0 flex gap-1 overflow-hidden">
                 <div className="flex flex-col gap-4 w-full md:max-w-68 md:pr-3 overflow-y-auto">
-                    <button
+                    {canCreate && <button
                         onClick={handleCreateRole}
                         disabled={isCreating}
                         className={`flex items-center justify-center gap-1.5 bg-accent text-primary-white hover:bg-primary-black dark:hover:bg-primary-white hover:text-primary-white dark:hover:text-accent text-sm py-2 rounded-xl transition-all shrink-0 ${isCreating ? "opacity-50 cursor-not-allowed" : ""}`}
@@ -64,7 +69,7 @@ function RolesLayoutContent({ children }: { children: React.ReactNode }) {
                             {PlusIcon}
                         </div>
                         {isCreating ? t("creating") : t("createNew")}
-                    </button>
+                    </button>}
 
                     <RoleListContainer
                         roles={roles}

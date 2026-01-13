@@ -2,10 +2,21 @@
 
 import {UserCard, useUsers} from ".";
 import {useTranslations} from "next-intl";
+import {usePermissions} from "@/hooks";
+import {PermissionFlags} from "@/constants";
 
 export const UserList = () => {
     const t = useTranslations("Users")
     const { filteredUsers, rolesCache, isLoading, users } = useUsers();
+
+    const { hasPermission } = usePermissions();
+
+    const canSeeDetails = hasPermission([
+        PermissionFlags.SEE_USERS_DETAILS,
+        PermissionFlags.MANAGE_USERS,
+        PermissionFlags.REMOVE_USERS,
+        PermissionFlags.EDIT_USERS_DETAILS,
+    ]);
 
     if (isLoading || (users.length === 0 && filteredUsers.length === 0)) {
         return (
@@ -32,6 +43,7 @@ export const UserList = () => {
                     key={user.id}
                     user={user}
                     role={user.roleId ? rolesCache[user.roleId] : undefined}
+                    disabled={!canSeeDetails}
                 />
             ))}
         </div>

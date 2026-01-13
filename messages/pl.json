@@ -163,9 +163,7 @@
     "createRoles": "Tworzenie ról",
     "createRolesDescription": "Pozwala na definiowanie nowych ról w systemie",
     "deleteRoles": "Usuwanie ról",
-    "deleteRolesDescription": "Pozwala na usuwanie ról (tylko jeśli nie są przypisane do żadnego użytkownika)",
-    "applyRoles": "Nadawanie ról",
-    "applyRolesDescription": "Umożliwia przypisywanie ról do konkretnych kont użytkowników"
+    "deleteRolesDescription": "Pozwala na usuwanie ról (tylko jeśli nie są przypisane do żadnego użytkownika)"
   },
   "Users": {
     "noUsersFound": "Nie znaleziono żadnych użytkowników",
@@ -229,7 +227,10 @@
     "noRole": "Brak roli",
     "expiry": "Ważność",
     "create": "Utwórz",
-    "errorInvalidEmail": "Podaj poprawny adres e-mail"
+    "errorInvalidEmail": "Podaj poprawny adres e-mail",
+    "createdBy": "Stworzony przez:",
+    "createdAt": "Stworzony::",
+    "updatedAt": "Ostatnia aktualizacja:"
   },
   "Errors": {
     "retry": "Ponów próbę",
@@ -245,6 +246,10 @@
     "resetError": "Nie udało się zresetować hasła",
     "serverError": "Błąd serwera. Spróbuj ponownie później",
     "invalidCredentials": "Nieprawidłowy e-mail lub hasło",
+    "403": {
+      "title": "Forbidden",
+      "message": "Nie masz dostępu do tego zasobu"
+    },
     "404": {
       "title": "Nie Znaleziono",
       "messages": {
