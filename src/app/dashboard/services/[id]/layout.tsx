@@ -19,7 +19,7 @@ export default async function Layout({ children, params } : ServiceProp) {
                 <ServiceNavBar/>
             </div>
             <div className="w-full h-full">
-                <ServiceDataProvider>
+                <ServiceDataProvider serviceName={id}>
                     {children}
                 </ServiceDataProvider>
             </div>

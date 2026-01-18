@@ -3,8 +3,11 @@
 import Link from "next/link";
 import {useServices} from "@/components/dashboard/services/ServicesContext";
 import {ServiceComponent} from "@/components/dashboard/services/ServiceComponent";
+import {useTranslations} from "next-intl";
+import {CreateServiceButton} from "@/components/dashboard/services/CreateServiceButton";
 
 export const ServiceList = () => {
+    const t = useTranslations("Services")
     const { services, isLoading } = useServices();
 
     if (isLoading) {
@@ -17,19 +20,25 @@ export const ServiceList = () => {
 
     if (services.length === 0) {
         return (
-            <div className="flex flex-col items-center justify-center py-20 bg-muted-white/5 dark:bg-primary-black/5 rounded-3xl border-2 border-dashed border-muted-gray/10">
-                <p className="text-sm font-medium text-muted-gray dark:text-muted-white/40 uppercase tracking-widest">
-                    No services found
-                </p>
-                <p className="text-xs text-muted-gray/60 mt-1">
-                    Twój system nie posiada jeszcze żadnych aktywnych instancji.
-                </p>
+            <div className="flex flex-col w-full h-full gap-2">
+                <CreateServiceButton/>
+
+                <div className="flex flex-col w-full h-full gap-2 items-center justify-center">
+                    <p className="text-2xl text-muted-gray dark:text-muted-white">
+                        {t("noServicesFound")}
+                    </p>
+                    <p className="font-light text-muted-gray/60 dark:text-muted-white/60">
+                        {t("noServicesFoundDescription")}
+                    </p>
+                </div>
             </div>
         );
     }
 
     return (
-        <div className="flex flex-col w-full gap-2">
+        <div className="flex flex-col w-full gap-6">
+            <CreateServiceButton/>
+
             {services.map((service) => (
                 service.status === "CREATING" ?
                     <ServiceComponent key={service.name} service={service} /> :

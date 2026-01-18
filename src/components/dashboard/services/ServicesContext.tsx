@@ -2,12 +2,16 @@
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { ServiceBaseInfo } from '@/types/services';
+import {useDispatch} from "react-redux";
+import {addPopup} from "@lib/features/popupSlice";
+import {GATEWAY_URL} from "@/constants";
+import axios from "axios";
 
 interface ServicesContextType {
     services: ServiceBaseInfo[];
     isLoading: boolean;
     addService: (service: ServiceBaseInfo) => void;
-    refreshServices: () => Promise<void>;
+    refreshServices: () => void;
 }
 
 const ServicesContext = createContext<ServicesContextType | undefined>(undefined);
@@ -15,20 +19,21 @@ const ServicesContext = createContext<ServicesContextType | undefined>(undefined
 export function ServicesProvider({ children }: { children: React.ReactNode }) {
     const [services, setServices] = useState<ServiceBaseInfo[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const dispatch = useDispatch()
 
-    const refreshServices = useCallback(async () => {
+    const refreshServices = useCallback(() => {
         setIsLoading(true);
-        try {
-            const response = await fetch('/api/services');
-            if (!response.ok) throw new Error('Failed to fetch');
-            const data = await response.json();
-            setServices(data);
-        } catch (error) {
-            // TODO handling
-        } finally {
-            setIsLoading(false);
-        }
-    }, []);
+        axios.get(`${GATEWAY_URL}/services`)
+            .then((response) => {
+                setServices(response.data);
+            })
+            .catch(() => {
+                dispatch(addPopup({ type: "error", message: "errorFetchServices" }));
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+    }, [dispatch]);
 
     useEffect(() => {
         refreshServices();

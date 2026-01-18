@@ -2,8 +2,11 @@
 
 import { useRouter } from 'next/navigation';
 import { TerminalIcon } from "@/components/icons";
-import {PodInfo} from "@/types";
-import {PodIPComponent} from "@/components/dashboard/services/PodIPComponent";
+import { PodInfo } from "@/types";
+import { PodIPComponent } from "@/components/dashboard/services/PodIPComponent";
+import { useServiceData } from "@/components/dashboard/services/ServiceDataContext";
+import {usePermissions} from "@/hooks";
+import {PermissionFlags} from "@/constants";
 
 interface PodItemProps {
     pod: PodInfo;
@@ -21,6 +24,16 @@ const getStatusColor = (status: string) => {
 
 export const PodComponent = ({ pod, serviceId }: PodItemProps) => {
     const router = useRouter();
+    const { stopPod, isStoppingPod } = useServiceData();
+    const { hasPermission } = usePermissions();
+
+    const isLoading = isStoppingPod === pod.name;
+
+    const handleStopClick = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        if (isLoading) return;
+        stopPod(pod.name);
+    };
 
     return (
         <div
@@ -47,9 +60,20 @@ export const PodComponent = ({ pod, serviceId }: PodItemProps) => {
                     {pod.status}
                 </div>
 
-                <div className="flex gap-1" onClick={(e) => e.stopPropagation()}>
-                    <button title="Stop Pod" className="p-2 rounded-lg hover:bg-red-primary/10 text-muted-gray hover:text-red-primary transition-colors">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="6" y="6" width="12" height="12"></rect></svg>
+                <div className="flex gap-1">
+                    <button
+                        onClick={handleStopClick}
+                        disabled={isLoading || pod.status !== "Running" || !hasPermission(PermissionFlags.MANAGE_SERVICES_STATE)}
+                        title="Stop Pod"
+                        className="p-2 rounded-lg not-disabled:hover:bg-red-primary/10 text-muted-gray not-disabled:hover:text-red-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                    >
+                        {isLoading ? (
+                            <div className="size-4.5 border-2 border-red-primary/20 border-t-red-primary rounded-full animate-spin" />
+                        ) : (
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <rect x="6" y="6" width="12" height="12"></rect>
+                            </svg>
+                        )}
                     </button>
                 </div>
             </div>

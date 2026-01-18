@@ -70,6 +70,18 @@
     "roles": "Role",
     "unknownUser": "Nieznany użytkownik"
   },
+  "Dashboard": {
+    "title": "Kokpit",
+    "services": "Usługi",
+    "infrastructure": "Infrastruktura w pigułce",
+    "running": "Uruchomione",
+    "stopped": "Zatrzymane",
+    "podsMetrics": "Metryki Podów",
+    "instanceDistribution": "Dystrybucja instancji",
+    "active": "aktywne",
+    "healthy": "Zdrowe",
+    "issues": "problemy"
+  },
   "Roles": {
     "title": "Role",
     "createNew": "Utwórz nową",
@@ -91,7 +103,6 @@
     "delete": "Usuń",
     "save": "Zapisz",
     "noRoles": "Nic tu nie ma",
-
     "unsavedChanges": {
       "title": "Poczekaj chwilę!",
       "description": "Masz tu niezapisane zmiany. Jeżeli wyjdziesz teraz to zostaną one utracone. Jaka decyzja?",
@@ -104,11 +115,9 @@
       "confirm": "Usuń",
       "cancel": "Nie rób tego"
     },
-
     "systemCategory": "System",
     "admin": "Administrator",
     "adminDescription": "Nadaje pełne uprawnienia do wszystkich modułów (ignoruje pozostałe ustawienia)",
-
     "servicesCategory": "Usługi",
     "readServices": "Podgląd usług",
     "readServicesDescription": "Użytkownik widzi listę wszystkich dostępnych usług. Aby przypisać dostęp do konkretnej usługi, użyj uprawnień dodatkowych użytkownika",
@@ -122,7 +131,6 @@
     "manageServicesStateDescription": "Pozwala na uruchamianie, zatrzymywanie oraz restartowanie usług",
     "updateServices": "Aktualizacja usług",
     "updateServicesDescription": "Użytkownik może przeprowadzać aktualizacje wersji zainstalowanych usług",
-
     "filesCategory": "Pliki",
     "readAllFiles": "Dostęp do plików",
     "readAllFilesDescription": "Pełny wgląd w strukturę katalogów oraz możliwość pobierania wszystkich plików",
@@ -130,13 +138,11 @@
     "editAllFilesDescription": "Pozwala na tworzenie, zmianę nazw, przenoszenie oraz edycję zawartości plików",
     "deleteAllFiles": "Usuwanie plików",
     "deleteAllFilesDescription": "Pozwala na bezpowrotne usuwanie dowolnych plików i folderów",
-
     "settingsCategory": "Ustawienia",
     "readAppConfig": "Podgląd ustawień systemu",
     "readAppConfigDescription": "Dostęp do odczytu globalnej konfiguracji aplikacji i systemu",
     "editAppConfig": "Edycja ustawień systemu",
     "editAppConfigDescription": "Możliwość zmiany zmiennych środowiskowych i globalnych parametrów pracy systemu",
-
     "databaseCategory": "Bazy danych",
     "readAllDatabases": "Podgląd baz danych",
     "readAllDatabasesDescription": "Wgląd w listę baz danych oraz podgląd ich struktur wewnętrznych",
@@ -144,7 +150,6 @@
     "updateAllDatabasesDescription": "Pozwala na modyfikację rekordów oraz schematów we wszystkich bazach danych",
     "deleteAllDatabases": "Usuwanie baz danych",
     "deleteAllDatabasesDescription": "Pozwala na trwałe usuwanie baz danych i wszystkich zawartych w nich informacji",
-
     "usersCategory": "Użytkownicy",
     "seeUsersDetails": "Podgląd profili",
     "seeUsersDetailsDescription": "Dostęp do szczegółowych informacji o kontach i aktywności innych użytkowników",
@@ -156,7 +161,6 @@
     "removeUsersDescription": "Pozwala na trwałe usuwanie kont użytkowników z systemu",
     "manageUsers": "Zarządzanie użytkownikami",
     "manageUsersDescription": "Pełna kontrola administracyjna nad kontami, włączając w to blokowanie i zmianę statusów",
-
     "rolesCategory": "Role",
     "editRoles": "Edycja ról",
     "editRolesDescription": "Możliwość modyfikacji istniejących ról i przypisanych do nich uprawnień",
@@ -165,19 +169,14 @@
     "deleteRoles": "Usuwanie ról",
     "deleteRolesDescription": "Pozwala na usuwanie ról (tylko jeśli nie są przypisane do żadnego użytkownika)"
   },
-  "Services": {
-    "console": "Konsola",
-    "versions": "Wersje",
-    "settings": "Ustawienia"
-  },
   "Users": {
+    "title": "Użytkownicy",
     "noUsersFound": "Nie znaleziono żadnych użytkowników",
     "sortByLabel": "Sortuj po",
     "indexAsc": "Rola (domyślnie)",
     "nameAsc": "Nazwa",
     "emailAsc": "Email",
     "dateDesc": "Data stworzenia",
-
     "inviteExpired": "Zaproszenie wygasło",
     "inviteExpiresIn": "Zaproszenie wygasa",
     "timeUnits": {
@@ -185,7 +184,6 @@
       "hours": "{count, plural, =1 {za godzinę} one {za # godzinę} few {za # godziny} many {za # godzin} other {za # godzin}}",
       "minutes": "{count, plural, =1 {za minutę} one {za # minutę} few {za # minuty} many {za # minut} other {za # minut}}"
     },
-
     "filters": {
       "searchByName": "Imię i nazwisko...",
       "searchByEmail": "Adres email...",
@@ -201,7 +199,6 @@
       "to": "Zaproszony przed",
       "unknown": "Nieznany"
     },
-
     "role": "Rola użytkownika",
     "selectRole": "Wybierz rolę...",
     "additionalPermissions": "Dodatkowe uprawnienia",
@@ -212,7 +209,6 @@
     "discardChanges": "Odrzuć zmiany",
     "saveAndExit": "Zapisz i wyjdź",
     "none": "Bez roli",
-
     "resetPasswordBtn": "Resetuj hasło",
     "deleteUserBtn": "Usuń użytkownika",
     "deleteUserTitle": "Usuwanie użytkownika",
@@ -226,7 +222,6 @@
     "deleteUserError": "Błąd podczas usuwania użytkownika",
     "resetPasswordSuccess": "E-mail z resetem został wysłany",
     "resetPasswordError": "Nie można zresetować hasła (aktywne hasło tymczasowe)",
-
     "createUser": "Nowy użytkownik",
     "email": "Adres e-mail",
     "noRole": "Brak roli",
@@ -234,8 +229,74 @@
     "create": "Utwórz",
     "errorInvalidEmail": "Podaj poprawny adres e-mail",
     "createdBy": "Stworzony przez:",
-    "createdAt": "Stworzony::",
+    "createdAt": "Stworzony:",
     "updatedAt": "Ostatnia aktualizacja:"
+  },
+  "Services": {
+    "services": "Serwisy",
+    "create": "Utwórz nowy serwis",
+    "noServicesFound": "Nie znaleziono żadnych serwisów",
+    "noServicesFoundDescription": "Obecnie nie ma tu żadnych dostępnych serwisów",
+    "globalStatus": "Status Serwisu",
+    "start": "Start",
+    "stopAll": "Zatrzymaj",
+    "restartAll": "Zrestartuj",
+    "podInstances": "Instancje",
+    "podInstancesDescription": "Obecnie dostępne instancje dla {name}",
+    "noPodsFound": "Brak aktywnych instancji",
+    "console": "Konsola",
+    "versions": "Wersje",
+    "settings": "Ustawienia",
+    "Create": {
+      "title": "Stwórz Serwis",
+      "subtitle": "Kreator Wdrożenia",
+      "name": "Unikalna Nazwa",
+      "namePlaceholder": "np. survival, lobby",
+      "engine": "Silnik",
+      "port": "Port Wewnętrzny",
+      "version": "Wersja Oprogramowania",
+      "selectVersion": "Wybierz wersję",
+      "build": "ID Builda",
+      "selectBuild": "Wybierz build",
+      "deploy": "Stwórz",
+      "required": "To pole jest wymagane",
+      "invalidNameFormat": "Dozwolone tylko małe litery, - oraz _",
+      "nameTaken": "Ta nazwa jest już zajęta"
+    },
+    "Versions": {
+      "noVersions": "Brak danych o wersjach",
+      "serviceVersions": "Zarządzaj dostępnymi wersjami",
+      "serviceVersionsDescription": "Zarządzaj zbudowanymi wersjami tego serwisu",
+      "newVersion": "Stwórz nową wersje",
+      "availableVersions": "Dostępne wersje",
+      "versionTag": "Oznaczenie Wersji",
+      "live": "Obecna",
+      "idle": "NIEAKTYWNA",
+      "active": "AKTYWA",
+      "switchTo": "Zmień",
+      "noVersionsAvailable": "Brak dostępnych wersji do wyświetlenia"
+    },
+    "Settings": {
+      "title": "Ustawienia",
+      "description": "Zarządzaj ustawieniami swojego serwisu",
+      "deleteTitle": "Usuń serwis",
+      "deleteDescription": "Uważaj! Ta operacja jest nieodwracalna i wyczysci wszystkie dane serwisie",
+      "delete": "Usuń",
+      "deleteAlertTitle": "Usunąć ten serwis?",
+      "deleteAlertDescription": "Za chwilę trwale usuniesz ten serwis. Ta operacja jest nieodwracalna i spowoduje usunięcie wszystkich powiązanych danych. Czy na pewno chcesz kontynuować?",
+      "confirmDelete": "Tak, usuń",
+      "cancel": "Anuluj"
+    },
+    "Pod": {
+      "back": "Powrót",
+      "instanceIdentifier": "Identyfikator Instancji",
+      "internalIP": "Wewnętrzne IP",
+      "externalIP": "Zewnętrzne IP",
+      "ipAddress": "Adres IP",
+      "stop": "Zatrzymaj instancję",
+      "status": "Status",
+      "port": "Port"
+    }
   },
   "Errors": {
     "retry": "Ponów próbę",
@@ -251,12 +312,15 @@
     "resetError": "Nie udało się zresetować hasła",
     "serverError": "Błąd serwera. Spróbuj ponownie później",
     "invalidCredentials": "Nieprawidłowy e-mail lub hasło",
+    "errorCreatingService": "Wystąpił błąd podczas tworzenia serwisu. Spróbuj ponownie za chwilę",
+    "required": "Wymagane",
     "403": {
-      "title": "Forbidden",
+      "title": "Zabronione",
       "message": "Nie masz dostępu do tego zasobu"
     },
     "404": {
       "title": "Nie Znaleziono",
+      "message": "Nie znaleziono tego, czego szukałeś",
       "messages": {
         "roleNotFound": "Rola nie została znaleziona"
       }
@@ -278,6 +342,8 @@
     "errorDeletingRole": "Wystąpił błąd podczas usuwania roli {name}",
     "errorRolePriority": "Wystąpił błąd podczas zmieniania priorytetu roli",
     "failedRefreshRoles": "Wystąpił błąd podczas odświeżania listy ról",
+    "fetchingUsersError": "Wystąpił błąd podczas pobierania użytkowników",
+    "fetchingUserRoleError": "Wystąpił błąd podczas pobierania szczegółów roli użytkownika",
     "saveUserSuccess": "Pomyślnie zapisano zmiany dla użytkownika",
     "saveUserError": "Wystąpił błąd podczas zapisywania zmian",
     "sessionUpdated": "Twoje uprawnienia zostały zaktualizowane",
@@ -286,6 +352,20 @@
     "userCreateError": "Błąd podczas tworzenia użytkownika",
     "emailExists": "Ten e-mail jest już w systemie",
     "deleteUserSuccess": "Pomyślnie usunięto użytkownika",
-    "deleteUserError": "Wystąpił błąd podczas usuwania użytkownika"
+    "deleteUserError": "Wystąpił błąd podczas usuwania użytkownika",
+    "errorFetchServices": "Wystąpił błąd podczas pobierania danych o serwisach",
+    "successCreateService": "Pomyślnie utworzono nowy serwis. Cierpliwości, proces tworzenia może zając minutę",
+    "successStartService": "Serwis został pomyślnie uruchomiony",
+    "successStopService": "Serwis został pomyślnie zatrzymany",
+    "successRestartService": "Serwis jest restartowany",
+    "errorExecutingAction": "Wystąpił błąd podczas wykonywania akcji",
+    "successVersionSwitched": "Pomyślnie zmieniono wersję serwisu",
+    "errorSwitchingVersion": "Błąd podczas zmiany wersji serwisu",
+    "successBuildStarted": "Rozpoczęto nową kompilację",
+    "errorBuildFailed": "Nie udało się rozpocząć nowej kompilacji",
+    "successServiceDeleted": "Serwis został usunięty",
+    "errorDeletingService": "Błąd podczas usuwania serwisu",
+    "successPodStopped": "Pomyślnie zatrzymano dzialanie instancji",
+    "resetPasswordSuccess": "Pomyślnie zresetowano hasło"
   }
 }

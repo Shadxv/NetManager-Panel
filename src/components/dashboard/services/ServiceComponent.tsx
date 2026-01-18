@@ -1,6 +1,6 @@
 import {ServiceBaseInfo} from "@/types";
 import {TerminalIcon} from "@/components/icons";
-import {getStatusConfig, toPascalCase} from "@/utils";
+import {getStatusConfig} from "@/utils";
 
 export const ServiceComponent = ({ service }: { service: ServiceBaseInfo }) => {
 

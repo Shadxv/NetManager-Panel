@@ -70,6 +70,18 @@
     "roles": "Roles",
     "unknownUser": "Unknown user"
   },
+  "Dashboard": {
+    "title": "Dashboard",
+    "services": "Services",
+    "infrastructure": "Infrastructure at a Glance",
+    "running": "Running",
+    "stopped": "Stopped",
+    "podsMetrics": "Pods Metrics",
+    "instanceDistribution": "Instance Distribution",
+    "active": "active",
+    "healthy": "Healthy",
+    "issues": "issues"
+  },
   "Roles": {
     "title": "Roles",
     "createNew": "Create new",
@@ -91,7 +103,6 @@
     "delete": "Delete",
     "save": "Save",
     "noRoles": "Nothing there",
-
     "unsavedChanges": {
       "title": "Hold on a second!",
       "description": "You've got some unsaved edits here. If you leave now, they're gone for good. What's the plan?",
@@ -104,11 +115,9 @@
       "confirm": "Delete anyway",
       "cancel": "Nevermind"
     },
-
     "systemCategory": "System",
     "admin": "Administrator",
     "adminDescription": "Gives users all permissions (ignores other settings)",
-
     "servicesCategory": "Services",
     "readServices": "View all services",
     "readServicesDescription": "User can see all availabe services. For assigning specific service for user to see use user's aditional permissions",
@@ -122,7 +131,6 @@
     "manageServicesStateDescription": "Allows to start, stop and restart services",
     "updateServices": "Update services",
     "updateServicesDescription": "User can perform version updates on installed services",
-
     "filesCategory": "Files",
     "readAllFiles": "Read all files",
     "readAllFilesDescription": "Full access to browse and download all files in the system",
@@ -130,13 +138,11 @@
     "editAllFilesDescription": "Allows to create, rename, move and edit file contents",
     "deleteAllFiles": "Delete all files",
     "deleteAllFilesDescription": "Allows to permanently delete any file or folder",
-
     "settingsCategory": "Settings",
     "readAppConfig": "Read app configuration",
     "readAppConfigDescription": "Can view global system and application settings",
     "editAppConfig": "Edit app configuration",
     "editAppConfigDescription": "Allows to modify global system variables and app behavior",
-
     "databaseCategory": "Database",
     "readAllDatabases": "Read all databases",
     "readAllDatabasesDescription": "Can view list of databases and their internal structures",
@@ -144,7 +150,6 @@
     "updateAllDatabasesDescription": "Allows to modify data and schemas in all databases",
     "deleteAllDatabases": "Delete databases",
     "deleteAllDatabasesDescription": "Allows to drop databases and remove all data",
-
     "usersCategory": "Users",
     "seeUsersDetails": "See users details",
     "seeUsersDetailsDescription": "Can view full profiles of other users",
@@ -156,7 +161,6 @@
     "removeUsersDescription": "Allows to permanently delete user accounts",
     "manageUsers": "Manage users",
     "manageUsersDescription": "Full administrative control over user accounts and their status",
-
     "rolesCategory": "Roles",
     "editRoles": "Edit roles",
     "editRolesDescription": "Allows to modify existing roles and their permissions",
@@ -166,13 +170,13 @@
     "deleteRolesDescription": "Allows to remove roles (only if not assigned to users)"
   },
   "Users": {
+    "title": "Users",
     "noUsersFound": "No users found",
     "sortByLabel": "Sort by",
     "indexAsc": "Role (default)",
     "nameAsc": "Name",
     "emailAsc": "Email",
     "dateDesc": "Creation date",
-
     "inviteExpired": "Invite expired",
     "inviteExpiresIn": "Invite expires",
     "timeUnits": {
@@ -180,7 +184,6 @@
       "hours": "{count, plural, =1 {in 1 hour} other {in # hours}}",
       "minutes": "{count, plural, =1 {in 1 minute} other {in # minutes}}"
     },
-
     "filters": {
       "searchByName": "Name and surname...",
       "searchByEmail": "Email address...",
@@ -196,7 +199,6 @@
       "to": "Invited before",
       "unknown": "Unknown"
     },
-
     "role": "User's role",
     "selectRole": "Choose role...",
     "additionalPermissions": "Additional permissions",
@@ -207,7 +209,6 @@
     "discardChanges": "Discard changes",
     "saveAndExit": "Save and leave",
     "none": "No role",
-
     "resetPasswordBtn": "Reset password",
     "deleteUserBtn": "Delete user",
     "deleteUserTitle": "Delete user",
@@ -221,7 +222,6 @@
     "deleteUserError": "Error deleting user",
     "resetPasswordSuccess": "Reset email has been sent",
     "resetPasswordError": "Cannot reset password (temporary password still active)",
-
     "createUser": "New user",
     "email": "Email address",
     "noRole": "No role",
@@ -233,16 +233,69 @@
     "updatedAt": "Last update:"
   },
   "Services": {
+    "services": "Services",
+    "create": "Create new service",
+    "noServicesFound": "No services found",
+    "noServicesFoundDescription": "Currently there is no available services",
+    "globalStatus": "Global Status",
+    "start": "Start",
+    "stopAll": "Stop All",
+    "restartAll": "Restart All",
+    "podInstances": "Pod Instances",
+    "podInstancesDescription": "Currently available pods in {name}",
+    "noPodsFound": "No active pod instances",
     "console": "Console",
     "versions": "Versions",
     "settings": "Settings",
-
+    "Create": {
+      "title": "Create Service",
+      "subtitle": "Deployment Wizard",
+      "name": "Unique Name",
+      "namePlaceholder": "e.g. survival, lobby",
+      "engine": "Engine",
+      "port": "Internal Port",
+      "version": "Software Version",
+      "selectVersion": "Select version",
+      "build": "Build ID",
+      "selectBuild": "Select build",
+      "deploy": "Create",
+      "required": "This field is required",
+      "invalidNameFormat": "Only lowercase, numbers, - and _ allowed",
+      "nameTaken": "This name is already taken"
+    },
+    "Versions": {
+      "noVersions": "No version data available",
+      "serviceVersions": "Available Service Versions",
+      "serviceVersionsDescription": "Manage build versions of this service",
+      "newVersion": "Build new version",
+      "availableVersions": "Available versions",
+      "versionTag": "Version Tag",
+      "live": "Live",
+      "idle": "IDLE",
+      "active": "ACTIVE",
+      "switchTo": "Switch to",
+      "noVersionsAvailable": "No versions available to display"
+    },
     "Settings": {
       "title": "Settings",
       "description": "Manager your services's settings",
       "deleteTitle": "Delete this service",
       "deleteDescription": "Be carefull! This action is permament and will wipe all the data.",
-      "delete": "Delete"
+      "delete": "Delete",
+      "deleteAlertTitle": "Delete this service?",
+      "deleteAlertDescription": "You're about to permanently delete this service. This action is irreversible and will remove all associated data. Are you sure you want to proceed?",
+      "confirmDelete": "Yes, delete it",
+      "cancel": "Cancel"
+    },
+    "Pod": {
+      "back": "Back",
+      "instanceIdentifier": "Instance Identifier",
+      "internalIP": "Internal IP",
+      "externalIP": "External IP",
+      "ipAddress": "IP Address",
+      "stop": "Stop this instance",
+      "status": "Status",
+      "port": "Port"
     }
   },
   "Errors": {
@@ -259,12 +312,15 @@
     "resetError": "Failed to reset password",
     "serverError": "Server error. Please try again later",
     "invalidCredentials": "Invalid email or password",
+    "errorCreatingService": "An error occured during creating new service. Please try again in a moment",
+    "required": "Required",
     "403": {
       "title": "Forbidden",
       "message": "You don't have access to this resource"
     },
     "404": {
       "title": "Not Found",
+      "message": "Not found what you've been looking for",
       "messages": {
         "roleNotFound": "Role has not been found"
       }
@@ -296,6 +352,20 @@
     "userCreateError": "Error occured during creating user",
     "emailExists": "This email is already in the system",
     "deleteUserSuccess": "Successfully deleted user",
-    "deleteUserError": "Error occured during deleting user"
+    "deleteUserError": "Error occured during deleting user",
+    "errorFetchServices": "Error occured during fetching services data",
+    "successCreateService": "Successfully created new service. Be patient, process may take a minute",
+    "successStartService": "Service has been started successfully",
+    "successStopService": "Service has been stopped successfully",
+    "successRestartService": "Service is restarting",
+    "errorExecutingAction": "An error occurred while executing the action",
+    "successVersionSwitched": "Successfully switched service version",
+    "errorSwitchingVersion": "Error switching service version",
+    "successBuildStarted": "New build has been started",
+    "errorBuildFailed": "Failed to start a new build",
+    "successServiceDeleted": "Service has been deleted",
+    "errorDeletingService": "Error deleting service",
+    "successPodStopped": "Successfully stopped instance process",
+    "resetPasswordSuccess": "Successfully reseted password"
   }
 }
