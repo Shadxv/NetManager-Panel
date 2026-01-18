@@ -34,7 +34,7 @@ export default function DashboardPage() {
     }
 
     const servicesData = [
-        { name: 'Running', value: stats.runningServices, color: 'var(--accent)' },
+        { name: 'Running', value: stats.runningServices, color: '#4f46e5' },
         { name: 'Stopped', value: stats.totalServices - stats.runningServices, color: 'rgba(156, 163, 175, 0.2)' }
     ];
 
@@ -72,7 +72,7 @@ export default function DashboardPage() {
                         </ResponsiveContainer>
                         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                             <span className="text-3xl text-primary-black dark:text-primary-white">{stats.totalServices}</span>
-                            <span className="text-[10px] uppercase tracking-[0.2em] text-muted-gray mt-1">{t("services")}</span>
+                            <span className="text-[10px] uppercase tracking-[0.2em] text-muted-gray dark:text-muted-white mt-1">{t("services")}</span>
                         </div>
                     </div>
 
@@ -84,7 +84,7 @@ export default function DashboardPage() {
                                 <span className="text-xl text-primary-black dark:text-primary-white">{stats.runningServices}</span>
                             </div>
                             <div className="flex justify-between items-center p-4 rounded-2xl bg-muted-gray/5 border border-muted-gray/10">
-                                <span className="text-sm text-muted-gray">{t("stopped")}</span>
+                                <span className="text-sm text-muted-gray dark:text-muted-white">{t("stopped")}</span>
                                 <span className="text-xl text-primary-black dark:text-primary-white">{stats.totalServices - stats.runningServices}</span>
                             </div>
                         </div>
@@ -102,7 +102,7 @@ export default function DashboardPage() {
                             <span className="text-5xl text-accent tracking-tighter">
                                 {stats.totalPods - stats.nonRunningPods}
                             </span>
-                            <span className="text-muted-gray text-sm">/ {stats.totalPods} {t("active")}</span>
+                            <span className="text-muted-gray dark:text-muted-white text-sm">/ {stats.totalPods} {t("active")}</span>
                         </div>
 
                         <div className="space-y-2">
@@ -112,7 +112,7 @@ export default function DashboardPage() {
                                     style={{ width: `${((stats.totalPods - stats.nonRunningPods) / stats.totalPods) * 100}%` }}
                                 />
                             </div>
-                            <div className="flex justify-between text-[10px] uppercase tracking-widest text-muted-gray/50">
+                            <div className="flex justify-between text-xs uppercase text-muted-gray/50 dark:text-muted-white/50">
                                 <span>{t("healthy")}</span>
                                 <span>{stats.nonRunningPods} {t("issues")}</span>
                             </div>
