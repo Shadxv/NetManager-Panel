@@ -57,3 +57,26 @@ export const getUserSubtext = (user: BaseUser | UserDetails, t: TranslateFn) => 
     }
     return user.email;
 };
+
+export const toPascalCase = (str: string): string => {
+    if (!str) return "";
+
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+};
+
+export const getLogStyle = (line: string): string => {
+    if (line.includes('ERROR') || line.includes('SEVERE')) return 'text-red-500 font-semibold';
+    if (line.includes('WARN') || line.includes('WARNING')) return 'text-orange-400 font-medium';
+    if (line.includes('INFO')) return 'text-primary-white/90';
+    return 'text-muted-white';
+};
+
+export const getStatusConfig = (status: string) => {
+    const s = status.toUpperCase();
+    switch (s) {
+        case "RUNNING": return { color: "bg-green-500", label: "Running" };
+        case "STOPPED": return { color: "bg-red-500", label: "Stopped" };
+        case "CREATING": return { color: "bg-zinc-400", label: "Creating" };
+        default: return { color: "bg-orange-500", label: toPascalCase(status) };
+    }
+};

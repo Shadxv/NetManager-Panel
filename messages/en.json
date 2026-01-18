@@ -232,6 +232,19 @@
     "createdAt": "Created at:",
     "updatedAt": "Last update:"
   },
+  "Services": {
+    "console": "Console",
+    "versions": "Versions",
+    "settings": "Settings",
+
+    "Settings": {
+      "title": "Settings",
+      "description": "Manager your services's settings",
+      "deleteTitle": "Delete this service",
+      "deleteDescription": "Be carefull! This action is permament and will wipe all the data.",
+      "delete": "Delete"
+    }
+  },
   "Errors": {
     "retry": "Retry",
     "goBack": "Back",

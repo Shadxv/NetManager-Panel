@@ -22,8 +22,16 @@ html {
     --color-green-primary: #34C759;
 }
 
+* {
+    /* Format: kolor-suwaka kolor-tła */
+    scrollbar-color: var(--color-accent) transparent;
+    scrollbar-width: thin;
+}
+
+/* Stylizacja dla Chromium / Safari / Webkit */
 ::-webkit-scrollbar {
     width: 8px;
+    height: 8px; /* Dla scrolla poziomego */
 }
 
 ::-webkit-scrollbar-track {
@@ -31,7 +39,15 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-    @apply bg-accent/75 hover:bg-accent p-px rounded-full;
+    /* Używamy zmiennej --color-accent z motywu */
+    background-color: var(--color-accent);
+    border-radius: 100px;
+    border: 2px solid transparent; /* Tworzy padding wokół suwaka */
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #6366f1; /* Nieco jaśniejszy odcień accent na hover */
 }
 
 .login-input {

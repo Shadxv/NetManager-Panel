@@ -165,6 +165,11 @@
     "deleteRoles": "Usuwanie ról",
     "deleteRolesDescription": "Pozwala na usuwanie ról (tylko jeśli nie są przypisane do żadnego użytkownika)"
   },
+  "Services": {
+    "console": "Konsola",
+    "versions": "Wersje",
+    "settings": "Ustawienia"
+  },
   "Users": {
     "noUsersFound": "Nie znaleziono żadnych użytkowników",
     "sortByLabel": "Sortuj po",
