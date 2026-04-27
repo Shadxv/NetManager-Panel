@@ -8,7 +8,7 @@ A web-based management dashboard for the **DreamMC Network** infrastructure. The
 
 ---
 
-<video src="https://raw.githubusercontent.com/Shadxv/NetManager-Panel/main/docs/assets/example.mp4" controls width="100%">
+<video src="https://github.com/user-attachments/assets/ba893ddc-155c-4961-b204-c1101ec5b547" controls width="100%">
 </video>
 
 ---
