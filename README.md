@@ -8,7 +8,8 @@ A web-based management dashboard for the **DreamMC Network** infrastructure. The
 
 ---
 
-![NetManager Panel demo](docs/assets/example.mp4)
+<video src="docs/assets/example.mp4" controls="controls" style="max-width: 100%;">
+</video>
 
 ---
 
